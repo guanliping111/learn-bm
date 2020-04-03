@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size:100px">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" 
+  content="initial-scale=0.5,maximum-scale=0.5, minimum-scale=0.5,width=device-width, height=device-height, user-scalable=no">
+  <title>Document</title>
+  <!-- sdk -->
+  <script type="text/javascript" 
+  src="https://api.map.baidu.com/api?v=2.0&ak=47FQtS6XkphGqmZ5nSEj6WTSTwE8SGaT"></script>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <!-- html  +   css -->
+  <!-- 附近的商家 info  -->
+  <div class="shop-list">
+    <!-- <div class="poi-item-wrapper">
+      <div class="poi-info-wrapper">
+        <div class="image-wrapper">
+          <div class="imgbox">
+            <img src="http://p0.meituan.net/deal/__45899142__3351739.jpg@320w_320h_1e_1c" alt="">
+          </div>
+        </div>
+
+        <div class="poi-info">
+          <div class="poi-name"></div>
+          <div class="price-wrapper">
+            <span class="stars">
+                <i class="iconfont">&#xe501;</i>
+                <i class="iconfont">&#xe501;</i>
+                <i class="iconfont">&#xe501;</i>
+                <i class="iconfont">&#xe501;</i>
+                <i class="iconfont">&#xe501;</i>
+              </span>
+              <span class="price"></span> 
+            <div class="location"></div>
+          </div>
+          <div class="cate-wrapper">
+            <span class="cateName"></span>
+            <span class="small-tag-0"></span>
+          </div>
+          <div class="service-tags">
+            <span class="service-tag-0"></span>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <!-- <div id="map"></div> -->
+  <script>
+  // 1. 距离
+  // 2. 点 经纬度
+  // 115.941546,28.544622
+  // 命名规范,
+  const myLatitude = '25.853262',
+    myLongitude = '114.914791';
+  
+  //坐标 店名 评分 {}json 对象字面量
+    const shop = [
+      {
+        name:'华莱士汉堡（汇金广场店）',
+        pos:[115.426841,25.96057],
+        logo:'https://p1.meituan.net/200.0/deal/bfdef441904dd56c2d3a2e3d5a5af2d973978.jpg@142_0_850_850a%7C267h_267w_2e_90Q',
+        price:'￥22/人',
+        cateName:'西式快餐/炸鸡',
+        smallTag:'汇金广场周边美食第一名',
+        serviceTag:'支持外卖',
+        evaluate:5
+      },
+      {
+        name:'阿华大虾（步步高店店）',
+        pos:[114.931631,25.860376],
+        logo:'https://p1.meituan.net/180.180/deal/4400216d3de44bb3c11df5e549a23be5773206.jpg@220w_125h_1e_1c',
+        price:'￥50/人',
+        cateName:'海鲜火锅',
+        smallTag:'',
+        serviceTag:'支持外卖',
+        evaluate:5
+      },
+      {
+        name:'鱼的错（城市商业中心旗舰店）',
+        pos:[114.943556,25.841552],
+        logo:'https://p1.meituan.net/600.600/mogu/a3c7f44950dceb0220eb492ef54bc548169947.jpg@220w_125h_1e_1c',
+        price:'￥45/人',
+        cateName:'湘菜',
+        smallTag:'全城湘菜第4名',
+        serviceTag:'支持外卖',
+        evaluate:5
+      },
+      {
+        name:'大龍火锅（汇金广场）',
+        pos:[114.916585,25.851439],
+        logo:'https://p0.meituan.net/msmerchant/4866c6d6863b17f869d82353bf79b275240063.jpg@275w_156h_1e_1c',
+        price:'￥58/人',
+        cateName:'重庆火锅',
+        smallTag:'全城火锅第10名',
+        serviceTag:'',
+        evaluate:3
+      },
+      {
+        name:'川味火锅',
+        pos:[115.42151,25.961386],
+        logo:'https://img.meituan.net/180.180/msmerchant/7a513c21ec59c1439205c1f2b9be5c0c3424289.png@220w_125h_1e_1c',
+        price:'￥65/人',
+        cateName:'四川火锅',
+        smallTag:'全城火锅第五名',
+        serviceTag:'支持买单',
+        evaluate:4
+      },
+      {
+        name:'鸿记煌三汁焖锅',
+        pos:[114.947703,25.856517],
+        logo:'https://p1.meituan.net/mogu/a9d679514a8d1d12ce45ddf63e5fa7df111835.jpg@275w_156h_1e_1c',
+        price:'￥33/人',
+        cateName:'焖锅',
+        smallTag:'红旗大道美食第二名',
+        serviceTag:'支持外卖',
+        evaluate:5
+      },
+      {
+        name:'九加九火锅（南康山店）',
+        pos:[115.42424,25.965983],
+        logo:'https://img.meituan.net/msmerchant/ff65c424c720f540dea36997dc84a5481742704.png@600w_600h_1l',
+        price:'￥72/人',
+        cateName:'',
+        smallTag:'',
+        serviceTag:'支持预定',
+        evaluate:4
+      },
+      {
+        name:'老船长肉蟹煲（国光店）',
+        pos:[115.427771,25.961378],
+        logo:'https://p1.meituan.net/bbia/4b95b242e261c071bdf69d13c9cbbcb7769591.jpg@275w_156h_1e_1c',
+        price:'￥59/人',
+        cateName:'肉蟹煲',
+        smallTag:'国光/宝林及周边美食第1名',
+        serviceTag:'支持预定',
+        evaluate:4
+      },
+  
+    ];
+
+
+  // sdk 有点大， 他在远方
+  // js 事件机制
+  window.onload = function() {
+    const shopContainer = document.querySelector('.shop-list');
+    const map = new BMap.Map();
+    const myPoint = new BMap.Point(myLongitude,myLatitude);
+    
+    for(let i = 0;i< shop.length;i++){
+      let shopPoint = new BMap.Point(shop[i].pos[0],shop[i].pos[1]);
+      let distance = parseDistance(
+        map.getDistance(myPoint,shopPoint)
+      );
+      shopContainer.innerHTML +=`
+      <div class="poi-item-wrapper">
+        <div class="poi-info-wrapper">
+          <div class="image-wrapper">
+            <div class="imgbox">
+              <img src="${shop[i].logo}" alt="">
+            </div>
+          </div>
+          <div class="poi-info">
+          <div class="poi-name">${shop[i].name}</div>
+          <div class="price-wrapper">
+            <span class="stars">`+stars(shop[i].evaluate)+`</span>
+              <span class="price">${shop[i].price}</span> 
+            <div class="location">${distance}</div>
+          </div>
+          <div class="cate-wrapper">
+            <span class="cateName">${shop[i].cateName}</span>
+            <span class="small-tag-0">${shop[i].smallTag}</span>
+          </div>
+          <div class="service-tags">
+            <span class="service-tag-0">${shop[i].serviceTag}</span>
+          </div>
+        </div>
+        </div>
+      </div>
+      `
+    }
+    function parseDistance(distance) {
+      //  如果> 1000米 返回  4.1km
+      // 否则 整数  936m
+      if (distance < 1000) {
+        return parseInt(distance) + 'm'; 
+      } else {
+        return (distance/1000).toFixed(1) + 'km';
+      }
+    }
+
+    function stars(evaluate){
+      let ihtml = [];
+      for(let i = 0; i < evaluate; i++){
+        ihtml += `<i class="iconfont">&#x3432;</i>`
+      }
+      for(let i = 0; i < 5-evaluate; i++){
+        ihtml += `<i class="iconfont star-black">&#xe81a;</i>`
+      }
+      return ihtml;
+    }
+
+
+    //  开始我们的js 编程
+    // const map = new BMap.Map(); //实例化地图
+    // map.centerAndZoom("南昌县仁兴家园", 17)
+
+    //两点距离
+    // const myPoint = new BMap.Point(myLongitude, myLatitude);
+    // const kfcPoint = new BMap.Point(kfcLongitude, kfcLatitude);
+    // const distance = parseDistance(
+      // 925.1111
+      // map.getDistance(myPoint, kfcPoint)
+    // ); // Number
+    // console.log(distance);
+    // document.querySelector('.poi-name').innerHTML =  '肯德基';
+    // document.querySelector('.location').innerHTML = distance;
+    // document.querySelector('.imgbox img').src = 
+    //   "https://p0.meituan.net/200.0/deal/607cffdccca7f4da09a2dddeedd31a8e49072.jpg@126_0_388_388a%7C267h_267w_2e_100Q";
+    // document.querySelector('.cateName').innerHTML = '西式快餐/炸鸡';
+    // document.querySelector('.service-tag-0').innerHTML = '支持外卖';
+    // document.querySelector('.small-tag-0').innerHTML = '大润发周边美食第一名';
+    // document.querySelector('.price').innerHTML = '￥99/人';
+      
+  }
+  
+  </script>
+</body>
+</html>

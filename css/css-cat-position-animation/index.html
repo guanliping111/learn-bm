@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cat</title>
+    <style>
+        /* css 选择器 */
+        .body{
+            /* 背景 */
+            background: url("./cat/maoshenti.png");
+            width: 117px;
+            height: 201px;
+            /* 水平居中 垂直居中 */
+            /* position: absolute relative; */
+            /* absolute 绝对定位，相对于父级第一个设置了定位属性的元素来定位如果没有相对于 body，*/
+            position: absolute;
+            /* 定位多少合适 */
+            /* 相对于 body的宽高：计算 宽和高的50% */
+            left: 50%;
+            top: 50%;
+            /* 微调transform长的50% 宽的50% */
+             /* x y z 左 -，右 +，  */
+             /* 相对于自己的宽高来计算百分比 */
+            /* transform: translate3d(-50%,-50%,0); */
+           
+        }
+        .weiba{
+            /* 相对于body定位 */
+            position: absolute;
+            width: 64px;
+            height: 194px;
+            background: url("./cat/maowei.png");
+            top: -182px;
+            /* 摇摆（rotate)起来 ease-in-out动画速度*/
+            animation: ani 3s ease-in-out infinite alternate;
+            /* 播放几次 infinite:无穷大 */
+            /* 以尾巴根部旋转 默认：50% 50% 中心点来旋转 */
+            transform-origin: 100% 100%;
+
+        }
+        .maozhua{
+            background: url("./cat/maozhua.png");
+            position: absolute;
+            width: 34px;
+            height: 81px;      
+            top: 180px;
+            right: 12px;
+            animation: ani 3s ease-in-out infinite alternate;
+            transform-origin: 100% 50%;
+            z-index: -1;
+        }
+        .maoyan1{
+            background: url("./cat/maoyan1.png") no-repeat;
+            position: absolute;  
+            top: 170px;
+            left: 76px;
+            width:2px;
+            height: 2px; 
+        }
+        .maoyan2{
+            background: url("./cat/maoyan2.png")no-repeat;
+            position: absolute;  
+            top: 173px;
+            left: 88px;
+            width: 2px;
+            height: 2px; 
+        }
+        .maozui{
+            background: url("./cat/maozui.png") no-repeat;
+            position: absolute;  
+            top: 182px;
+            left: 76px;
+            width:2px;
+            height: 2px; 
+        }
+        /* 关键帧：动画里面有几个关键点 */
+        /* 定义一个叫ani的动画 */
+        @keyframes ani{
+            100% {
+                /* 逆时针 5deg */
+                transform: rotate(-5deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 网页划分 块-->
+    <div class="cat">
+        <!-- 猫的组成 -->
+        <div class="body">
+            <div class="weiba"></div>
+            <div class="maozhua"></div>
+            <div class="maozui"></div>
+            <div class="maoyan1"></div>
+            <div class="maoyan2"></div>
+        </div>      
+    </div>
+</body>
+</html>
