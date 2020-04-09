@@ -1,0 +1,12 @@
+{
+  "name": "car",
+  "version": "1.0.0",
+  "description": "全栈  AI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "guanliping",
+  "license": "ISC"
+}
