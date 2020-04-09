@@ -67,8 +67,8 @@
         // { text: 'eat', done: false }   =>    <li></li>
         // map / forEach
         const ul = document.querySelector('ul');
-        let localDate = JSON.parse(localStorage.getItem('todo')) || [];
-        let todo = localDate;
+        let localDate = JSON.parse(localStorage.getItem('todo')) || [];// || 运算的技巧，如果前面条件为 true 后面就会不运行，如果前面 false 才会运行后面
+        let todo = localDate;// localStorage 有数据就 不仅要取出来 也要初始化渲染一次 data view 统一
         render();
 
         //  map  = [ `<li></li>`, `<li></li>`]
