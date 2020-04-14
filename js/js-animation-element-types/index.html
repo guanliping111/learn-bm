@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+      *{
+          margin: 0;
+          padding: 0;
+      }
+      body {
+          /* 渐变色  45deg:45度*/
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(45deg, red, blue),
+          linear-gradient(135deg, #3a41e0, #df854e) no-repeat;
+      }
+      a{
+          text-decoration: none;
+          color: black;
+          background-color:rgba(0,0,0,0,0.05);
+          border-radius: 20px;
+      }
+      .wrapper{
+          margin-left: auto;
+          margin-right: auto;
+          /* 要有宽度width  max-width */
+          max-width: 500px;
+          line-height: 2;
+      }
+      .menu{
+          display: flex;
+          list-style: none;
+          justify-content: center;
+          /* 外边距 撑大 */
+          margin: 100px 0;
+      }
+      .menu a{
+          margin: 0 20px;
+      }
+      .bgc{
+        background-color: white;
+        border-radius: 20px;
+        /* 白色框框定位在左上角 */
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        /* 放在下面不遮盖字  显示*/
+        z-index: -1;
+        /* all :发生变化的所有属性都有过渡效果 */
+        transition: all .3s;
+      }
+  </style>
+</head>
+
+<body>
+    <!-- html 语义化：nav -->
+  <nav>
+    <ul class="menu">
+      <li><a href="">Home</a></li>
+      <li><a href="">Order Status</a></li>
+      <li><a href="">Tweets</a></li>
+      <li><a href="">Read Our History</a></li>
+      <li><a href="">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="wrapper">
+    <p>Lorem ipsum dolor sit amet, <a href="">consectetur</a> adipisicing elit. Est <a href="">explicabo</a> unde natus
+      necessitatibus esse obcaecati distinctio, aut itaque, qui vitae!</p>
+    <p>Aspernatur sapiente quae sint <a href="">soluta</a> modi, atque praesentium laborum pariatur earum <a
+        href="">quaerat</a> cupiditate consequuntur facilis ullam dignissimos, aperiam quam veniam.</p>
+    <p>Cum ipsam quod, incidunt sit ex <a href="">tempore</a> placeat maxime <a href="">corrupti</a> possimus <a
+        href="">veritatis</a> ipsum fugit recusandae est doloremque? Hic, <a href="">quibusdam</a>, nulla.</p>
+    <p>Esse quibusdam, ad, ducimus cupiditate <a href="">nulla</a>, quae magni odit <a href="">totam</a> ut consequatur
+      eveniet sunt quam provident sapiente dicta neque quod.</p>
+    <p>Aliquam <a href="">dicta</a> sequi culpa fugiat <a href="">consequuntur</a> pariatur optio ad minima, maxime <a
+        href="">odio</a>, distinctio magni impedit tempore enim repellendus <a href="">repudiandae</a> quas!</p>
+  </div>
+  <script>
+    //mouseEnter
+    //createElement  => <div clas="bgc"></div> 创建一个div元素 类名是bgc
+    const hightLight = document.createElement('div');
+    hightLight.classList.add('bgc');
+
+    const allLinks = document.querySelectorAll('a');
+    let scroll = 0;
+    window.addEventListener('scroll', () => {
+      scroll = window.scrollY
+    })
+
+    //插到页面上
+    document.body.appendChild(hightLight);
+
+    allLinks.forEach(function(aNode) {
+      aNode.addEventListener('mouseenter',function(event) {
+        //获取点击的位置
+        const size = aNode.getBoundingClientRect();
+        hightLight.style.width = size.width + 'px';
+        hightLight.style.height = size.height + 'px';
+        // hightLight.style.left = size.left;
+        // hightLight.style.top = size.top;
+        // 设置它的样式，行内样式
+        //hightLight.style.transform = `translateX(${size.left}px) translateY(${size.top}px)`
+        hightLight.style.transform = `translateX(${size.left}px) translateY(${size.top + window.scrollY}px)`
+
+      })
+    })
+  </script>
+</body>
+
+</html>
