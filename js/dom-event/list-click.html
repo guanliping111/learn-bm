@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+        <!-- 3s 之后在下面插入 一个li -->
+    </ul>
+    <script>
+        //点击每一个 li 输出里面的文本内容
+        //方法1：只能选中当前页面已有的li节点 后添加没有效果
+        //      有几个li就产生几个绑定事件 只能监听已有的元素  
+
+        // const lis = document.querySelectorAll('li');//选中的是数组
+        // //每一个li都绑定事件
+        // lis.forEach((li) => {
+        //     li.addEventListener('click',function(){
+        //         console.log(li.innerText);//获取内容innerText
+        //     })
+        // }) 
+
+        setTimeout(function() {
+            //插入li节点
+            const ul = document.querySelector('ul');
+            //创建一个 li节点：<li></>
+            const li = document.createElement('li');
+            li.innerHTML = '2344';
+            ul.appendChild();
+        },3000)
+ 
+        //方法2  利用冒泡特点 只有一个事件绑定 监听未来的元素 节点多采取
+        //父节点可以监听 子节点的点击事件 （子节点点击 父节点也会收到这个click 事件）
+        //给父节点设置监听事件
+        const ul = document.querySelector('ul');
+        ul.addEventListener('click',function() {
+            //li.innerText 
+            const target = event.target;
+            console.log(target.innerText);
+        })
+
+
+    </script>
+</body>
+</html>
