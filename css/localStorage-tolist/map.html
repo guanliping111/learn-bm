@@ -13,9 +13,10 @@
         </li>
     </ul>
     <script>
-        let todo = [
+        //抽象出一个数组 todo[] ,把它映射成为 HTML的过程,用js来完成
+        let todo = [//创建一个数组 并列出要做的每一项
             {text: 'eat',done: false},
-            {text: 'sleep',done: false}
+            {text: 'work',done: false}
         ]
         //方法一 常规
         // let step1 = todo.map(function(item,i) {
@@ -30,7 +31,11 @@
         // console.log(step1);
 
             //方法二 精简
-        ul.innerHTML = todo.map(function(item,i) {
+        let step1 = todo.map(function(item,i) {
+            //ul.innerHTML  = todo.map(function(item,i) {
+            //map()里面接收的是一个函数function,item:数组里的每一项，三个参数，i :索引，表示在数组的第几项
+            //console.log(item,i,ret)//ret是map里面的原数组，每次循环都一样的，不常用所有这里不展开描述，
+            // map foreach 强调的功能不一样
             return `
             <li>
               <input type="checkbox" id="todo${i}">
