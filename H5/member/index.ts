@@ -42,50 +42,52 @@ const members: MembersEntity[] = [
         }
 ]
 
-const form = document.forms.myform;
-// console.log(form);
-form.addEventListener('submit', function (event) {
+const submit = document.querySelector('.submit'); 
+submit.addEventListener('submit', function (event) { 
+
+//function addItem(event) {
     event.preventDefault();
-    const id = form.idInput.value;
-    const name =form.nameInput.value;
-    const avatar =form.avatarInput.value;
-    const tellInput =parseInt(form.tellInput.value);
-    const addressInput =form.addressInput.value;
+    //const input = document.querySelector('[type="text" ]').Value;
+    const avatar = (document.getElementById('avatarInput') as HTMLInputElement).value;
+    const id = (document.getElementById('idInput') as HTMLInputElement).value;
+    const name= (document.getElementById('nameInput') as HTMLInputElement).value;
+    const tell = (document.getElementById('tellInput') as HTMLInputElement).value;
+    const address = (document.getElementById('addressInput') as HTMLInputElement).value;
     if (id.trim().length === 0) {
         alert('id 不能为空');
         return;
-    }
-    if (name.trim().length === 0) {
-        alert('name 不能为空');
-        return;
+        }
+        if (name.trim().length === 0) {
+            alert('name 不能为空');
+            return;
     }
     const ids = parseInt(id);
+    const tells =parseInt(tell)
     members.push({
+        avatar: avatar,
         id: ids,
         name: name,
-        avatar: avatar,
-        tell: tellInput,
-        address: addressInput
-    });
-    console.log(members);
-    render();
-})
+        tell: tells,
+        address: address
+     });
+        console.log(members);
+    })
 
-
-const tbody = document.querySelector('#member tbody');
-//tbody.innerHTML = 
-//从json 数组变成html数组 
-    //console.log(
+    const tbody = document.querySelector('#member tbody');
+     //tbody.innerHTML = 
+     //从json 数组变成html数组
         tbody.innerHTML = members.map((member) => {
-    return `
-        <tr> <td>
-              <img src="${member.avatar}">
-            </td>
-            <td>${member.id}</td>
-            <td>${member.name}</td>
-            <td>${member.tell}</td>
-            <td>${member.address}</td>
-
-        </tr>
-    `
-}).join("")//数组拼接 join
+            return `
+                <tr> <td>
+                      <img src="${member.avatar}">
+                    </td>
+                    <td>${member.id}</td>
+                    <td>${member.name}</td>
+                    <td>${member.tell}</td>
+                    <td>${member.address}</td>
+        
+                </tr>
+            `
+        }).join("")//数组拼接 join
+//submit.addEventListener('submit',addItem);
+  
