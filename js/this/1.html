@@ -61,7 +61,7 @@
   // 往后的参数 就是 foo 调用时需要的形参
   // foo.call(window, ' b', 'c variable')
   // foo.call(obj, 'b var', 'c var')
-  //  往后的参数 就是 foo 调用时需要的形参, 但是 不是一个个参数参开放在后面，
+  //  apply 往后的参数 就是 foo 调用时需要的形参, 但是 不是一个个参数参开放在后面，
   // 要用数组包起来
   foo.apply(obj, ['b var', 'c var']);
   // foo('b') 调用 window
