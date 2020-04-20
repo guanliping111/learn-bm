@@ -4,42 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.bootcss.com/weui/2.3.0/style/weui.css" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-    
-    <div class="footer">
-        <div class="foot-item">
-            <a href="#">
-                <div><span class="iconfont">&#xe642;</span></div>
-                <span class="title">首页</span>
-            </a>
+    <div class="warpper">
+        <div class="header">
+            <div class="search-address">
+                <p>南昌</p>
+                <div class="search-addressImg">
+                    <img src="./imges/1.png" alt="">
+                </div>
+            </div>
+            <div class="search-input">
+                <div class="weui-search-bar" id="searchBar">
+                    <form class="weui-search-bar__form">
+                        <div class="weui-search-bar__box">
+                            <i class="weui-icon-search"></i>
+                            <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+                            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                        </div>
+                        <label class="weui-search-bar__label" id="searchText">
+                            <i class="weui-icon-search"></i>
+                            <span>寻找锦鲤</span>
+                        </label>
+                    </form>
+                    <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+                </div>
+            </div>
+            <div class="search-friend">
+                <div class="search-friendImg">
+                    <span class="iconfont" class="weui-tabbar__icon">&#xe62e;</span>
+                </div>
+            </div>
         </div>
-        <div class="foot-item">
-            <a href="#">
-                <div><span class="iconfont">&#xe601;</span></div>
-                <span class="title">理财</span>
-            </a>
+
+        <div class="container">
+            <div class="contain1">
+                <div class="uses-item">
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe62f;
+                            </span>
+                        <p>美食</p>
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe600;</span>
+                        <p>外卖</p>
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe671;</span>
+                        <p>商超到家</p>
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                           <span class="iconfont" class="weui-tabbar__icon">&#xe607;</span>
+                         <p>休闲娱乐</p>
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe60e;
+                            </span>
+                        <p>周边游</p>  
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe636;
+                            </span>
+                        <p>KTV</p>
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe657;
+                            </span>
+                        <p>户外</p>    
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe63a;</span>
+                        <p>城市服务</p>   
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe65d;</span>
+                        <p>健身</p>   
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe60b;</span>
+                        <p>汉堡</p>
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe638;
+                            </span>
+                        <p>火车票</p>
+                        </div>
+                    </div>
+                    <div class="use">
+                        <div class="useImg">
+                            <span class="iconfont" class="weui-tabbar__icon">&#xe609;</span>
+                        <p>酒店预订</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contain1">
+                
+            </div>
+            <div class="contain1"></div>
+            <div class="contain1"></div>
         </div>
-        <div class="foot-item">
-            <a href="#">
-                <div><span class="iconfont">&#xe602;</span></div>
-                <span class="title">口碑</span>
-            </a>
-        </div>
-        <div class="foot-item">
-            <a href="#">
-                <div><span class="iconfont">&#xe69e;</span></div>
-                <span class="title">朋友</span>
-            </a>
-        </div>
-        <div class="foot-item">
-            <a href="#">
-                <div><span class="iconfont">&#xe62e;</span></div>
-                <span class="title">我的</span>
-            </a>
+
+        <div class="footer">
+            <div class="weui-tabbar">
+                <div class="weui-tabbar__item">
+                    <div style="display: inline-block; position: relative;">
+                        <span class="iconfont" class="weui-tabbar__icon">&#xe642;</span>
+                    </div>
+                    <p class="weui-tabbar__label">首页</p>
+                </div>
+                <div class="weui-tabbar__item">
+                    <div><span class="iconfont" class="weui-tabbar__icon">&#xe601;</span></div>
+                    <!-- <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon"> -->
+                    <p class="weui-tabbar__label">理财</p>
+                </div>
+                <div class="weui-tabbar__item weui-bar__item_on">
+                    <div style="display: inline-block; position: relative;">
+                        <span class="iconfont" class="weui-tabbar__icon">&#xe602;</span>
+                        <!-- <span class="weui-badge weui-badge_dot" style="position: absolute; top: 0; right: -6px;"></span> -->
+                    </div>
+                    <p class="weui-tabbar__label">口碑</p>
+                </div>
+                <div class="weui-tabbar__item">
+                    <div style="display: inline-block; position: relative;">
+                        <span class="iconfont" class="weui-tabbar__icon">&#xe69e;</span>
+                        <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">6</span>
+                    </div>
+                    <p class="weui-tabbar__label">朋友</p>
+                </div>
+                <div class="weui-tabbar__item">
+                    <span class="iconfont" class="weui-tabbar__icon">&#xe62e;</span>
+                    <p class="weui-tabbar__label">我的</p>
+                </div>
+            </div>
+
         </div>
     </div>
-    
     
 </body>
 </html>

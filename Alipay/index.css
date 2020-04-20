@@ -10,3 +10,21 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+* {
+  margin: 0;
+  padding: 0;
+}
+.header {
+  display: flex;
+  align-items: flex-start;
+}
+.container {
+  display: flex;
+}
+.footer {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 5vh;
+  bottom: 0;
+}
