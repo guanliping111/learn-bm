@@ -14,17 +14,42 @@
   margin: 0;
   padding: 0;
 }
+.warpper {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
 .header {
   display: flex;
   align-items: flex-start;
+  width: 100vw;
+  height: 6vh;
 }
 .container {
-  display: flex;
+  overflow: scroll;
+  background-color: #e6e6e6;
+  height: 88vh;
+}
+.container .container1 {
+  height: 12vh;
+  width: 100vw;
+}
+.container .advise-item {
+  width: 100vw;
+  height: 6vh;
+}
+.container .scroll-item {
+  width: 100vw;
+  height: 8vh;
+}
+.container .discount-item {
+  width: 100vw;
+  height: 62vh;
 }
 .footer {
   position: absolute;
   display: flex;
-  width: 100%;
-  height: 5vh;
+  width: 100vw;
+  height: 6vh;
   bottom: 0;
 }
