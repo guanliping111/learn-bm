@@ -14,6 +14,10 @@
   margin: 0;
   padding: 0;
 }
+html body {
+  height: 100%;
+  width: 100%;
+}
 .warpper {
   position: relative;
   height: 100vh;
@@ -25,26 +29,25 @@
   width: 100vw;
   height: 6vh;
 }
-.container {
-  overflow: scroll;
-  background-color: #e6e6e6;
+.header .container {
   height: 88vh;
+  overflow: scroll;
 }
-.container .container1 {
-  height: 12vh;
-  width: 100vw;
+.header .container .user {
+  height: 23vh;
+  width: 96vw;
+  padding: 1vh 5vw 0 5vw;
 }
-.container .advise-item {
-  width: 100vw;
-  height: 6vh;
+.header .container .user .user-item {
+  position: relative;
+  background-color: #fff;
+  border-radius: 4rem;
 }
-.container .scroll-item {
-  width: 100vw;
-  height: 8vh;
-}
-.container .discount-item {
-  width: 100vw;
-  height: 62vh;
+.header .container .user .user-item .user-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .footer {
   position: absolute;
