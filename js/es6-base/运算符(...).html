@@ -1,0 +1,40 @@
+<script>
+    //扩展运算符 ...
+    const max = Math.max(-1,-9,-5);
+    let arr = [10,2,5,6];
+    const max1 = Math.max(...arr);
+    let str = 'abcde';
+    //=> 数组 [a,b,c,d,e]
+    let arr1 = [...str];// 10,2,5,6
+    let obj = {
+        name: 'guan',
+        sex: 'nan',
+        a:{
+            c:{
+                d:{
+
+                }
+            }
+        }
+    }
+    console.log({...obj});// {name: "guan", sex: "nan"} 
+    console.log(max1);// 10
+    // 拷贝 
+    //let obj1 = obj;// this 两个的指向还是 obj
+    //delete obj1.name;
+    //console.log(obj);//{sex: "nan"}
+
+    // 浅复制 ：只复制第一层
+    let obj1 = {...obj};// 展开 再重组 obj1是拷贝过去的新对象
+    delete obj1.name;
+    delete obj1.a.c;
+    console.log(obj);//{name: "guan", sex: "nan"} 
+    console.log(obj,obj1)// 两个的c 都删了
+
+    //es6 对函数扩展：剩余参数 rest
+    function sum (...test){
+        console.log(rest);
+    }
+    sum(0,1,2,3,4,5);// [0,1,2,3,4,5]
+
+</script> 
