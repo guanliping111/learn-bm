@@ -1,0 +1,47 @@
+<script>
+    let obj1 = {
+        name = 'name',
+        sex = 'sex',
+        a: {
+            b: {
+                c: 20
+            }
+        }
+    }
+    // let obj2 = {
+    //     name = 'name',
+    //     sex = 'sex',
+    //     a: 1
+    // }
+
+    let t = obj1.a.b.c
+    //深拷贝  对象的循环
+    // for in
+    //递 || 归
+    // for(let key in obj1) {
+    //     console.log(key);
+    // }
+    function deepClone(obj) {
+        let res = {};
+        for(let key in obj) {//循环
+        //console.log(key);
+        //obj1 a,b都要深拷贝
+        //b 深拷贝：没有嵌套  res[key] = obj1[key];这样拷贝成功
+        //一旦有嵌套 就要一直拷贝 拷贝嵌套对象
+
+        if(typeof obj[key] === 'object'){
+            deepClone(obj[key]);
+        }
+        else{
+            res[key] = obj[key];
+        }
+     }
+        return res;
+    }
+    let obj2 = deepClone(obj1);
+    obj2.name = 'obj2 name';
+    console.log(obj2, obj1);
+
+
+
+</script>
