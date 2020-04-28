@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: 1px solid #000;
+        }
+        .btn {
+            outline: none;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="text">
+    <input type="file" id="file" hidden/>
+    <button class="btn">文件上传</button>
+    <img src="" alt="" id="preview" hidden>
+    <img src="./icon.png" alt="" id="flag" hidden>
+    <!--    canvas  纯空白 画布 要自己修饰-->
+    <canvas id="combine" width="290px" height="290px"></canvas>
+    <!-- onchange:输入框里面改变 -->
+    <script>
+        const fileNode = document.getElementById('file');
+        const combine = document.getElementById('combine');
+        const ctx = combine.getContext('2d');
+        //1. 画头像 canvas
+        //2.画国旗
+        fileNode.addEventListener('change', function(event) {
+            let file = event.target.files[0];//event.target:谁触发事件就指向谁
+            console.log(file);
+            //二进制 base64(编码)
+            let fileReader = new FileReader();
+            fileReader.onload = function(e) {//回调
+                console.log(e.target === fileReader);
+                consle.log(e.target.result);
+                document.getElementById('preview').src = e.target.result;
+                //异步问题 浏览器未把图片加载完毕 解决 onload
+                document.getElementById('preview').onload = function() {
+                     // 拿到image 元素 用 drawImage 画头像和国旗
+                    ctx.drawImage(document.getElementById('preview'), 0, 0, 200, 200);//0 起始坐标 290 终止坐标
+                    ctx.drawImage(document.getElementById('flag'), 0, 0, 200, 200);
+                }
+            }
+            fileReader.readAsDateURL(file);
+        })
+        document.querySelector('.btn').addEventListener('click', function() {
+            fileNode.click();
+        })
+    </script>
+</body>
+</html>
