@@ -12,6 +12,7 @@
         </button>
     </div>
     <script>
+        //最简单方法
         // const button = document.querySelector('.like-btn')
         // const buttonText = document.querySelector('.like-text');
         // let isLiked = false;   
@@ -20,7 +21,7 @@
         //     isLiked ? buttonText.innerHTML = '取消' :buttonText.innerHTML = '点赞'
         // },false)
         
-        // 封装 
+        // 封装 方法
         class LikeButton {
             // 构造函数 每次调用 默认执行
             constructor(){
@@ -29,16 +30,17 @@
             render(){
                 return `
                 <button id='like-btn'>
-                    <span class = 'link-text'>${this.state.isLiked?'取消':'点赞'}</span>
-                <tton>
+                    <span class = 'like-text'>${this.state.isLiked?'取消':'点赞'}</span>
+                <btton>
                 `
             }
         }
         const wrapper = document.querySelector('.wrapper');
         const likeButton = new LikeButton();
         wrapper.innerHTML = likeButton.render();
-        const likeButton2 = new LikeButton();
-        wrapper.innerHTML += likeButton.render();
+        //复用
+        // const likeButton2 = new LikeButton();
+        // wrapper.innerHTML += likeButton.render();
 
         // 流程性代码 点赞通用组件 不方便复用
         
