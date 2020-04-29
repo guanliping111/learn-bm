@@ -9,7 +9,7 @@
   <!-- DOM 挂载点 -->
   <div class="wrapper"></div>
   <script>
-  // 中央空调
+    //谁都可以调用
   const createDOMFromString = (domString) => {
     const oDiv = document.createElement('div'); // dom 节点
     oDiv.innerHTML = domString; // 抽象 
@@ -19,8 +19,7 @@
   class LikeButton {
     constructor() {
       // 申明属性
-      // 状态  喜欢 或不喜欢
-      this.state = { // JSON 
+      this.state = { // JSON  状态  喜欢 或不喜欢
         isLiked: false  // bool
       }
     }
@@ -38,20 +37,20 @@
         isLiked: !this.state.isLiked
       })
     }
-    // 做了什么？  灯， 状态函数有了 
+    // 点赞 取消  状态函数
     setState(state) {
       // insertBefore
       // console.log(state);
       // this.el   改变前的节点
       const oldEl = this.el; //前任
-      const parent = this.el.parentNode; // 找到父节点
+      const parent = this.el.parentNode; // 找到父节点wrapper 
       console.log(parent);
       this.state = state; // 数据属性
       this.el = this.render( )// 再渲染一下  现任
-      // 灵感， 业务能力
-      parent.insertBefore(this.el, oldEl); // insertBefore 
+      parent.insertBefore(this.el, oldEl); // insertBefore 插入到oldEl前面
       parent.removeChild(oldEl); // react  移除节点
     }
+    
   }
   
   const wrapper = document.querySelector('.wrapper');
