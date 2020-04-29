@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>进度条</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .progress-bar {
+            height: 4px;
+            margin-top: 80px;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgba(0, 0, 0, .3);
+        }
+        .progress {
+            width: 0;
+            height: 100%;
+            /* 进度条颜色 */
+            background-color: red;
+        }
+        .progress-botton {
+            position: absolute;
+            left: 0;
+            top: -5px;
+            width: 14px;
+            height: 14px;
+            border: 2px solid black;
+            border-radius: 50%;
+            background-color: red;
+            box-sizing: border-box;
+            margin-left: -7px;
+        }
+        .song-play{
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress"></div>
+        <div class="progress-botton"></div>
+    </div>
+    <div class="progress-bar2 progress-bar">
+        <div class="progress"></div>
+        <div class="progress-botton"></div>
+    </div>
+    <div class="song-play">
+        <img src="https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" alt="">
+        <div class="progress-bar3 progress-bar">
+            <div class="progress"></div>
+            <div class="progress-botton"></div>
+        </div>
+        <div class="time">
+            3:00/4:00
+        </div>
+    </div>
+    <script>
+
+        class Progress{
+            constructor(seclector, option) {
+                this.wrap = document.querySelector(seclector);
+                this.progressBtn = this.wrap.querySelector('.progress-botton');
+                this.progress = this.wrap.querySelector('.progress');
+                this.initStyle(option.style);
+                this.initEvent();
+            }
+            initStyle(styleObj) {
+                for(let key in styleObj){
+                    this.wrap.style[key] = styleObj[key];//设置行内样式
+                }
+            }
+            initEvent() {
+                let downx = 0;//按下时的坐标 x
+                let btnLeft = 0;//按钮距离最左边的距离
+                //获取宽度
+                const wrapLen = this.wrap.offsetWidth;
+                const progressBtnLen = this.progressBtn.offsetWidth;
+                this.progressBtn.addEventListener('touchstart', (event) => {
+                    //touches ：触点
+                    const touch = event.touches[0];
+                    btnLeft = parseInt(this.progressBtn.style.left || 0);//默认为0
+                    downx = touch.clientX;//当前拖到x 
+                })
+                this.progressBtn.addEventListener('touchmove', (event) => {
+                    const touch = event.touches[0]; 
+                    const diffx = touch.clientX - downx;//拖动的距离
+                    let left = diffx + btnLeft;//按钮长度
+                    if(left <= 0) left = 0;//限制按钮长度 
+                    if(left >= (wrapLen))  left = wrapLen;//不能超出wrap
+                    let percent = left / wrapLen * 100;
+                    this.progress.style.width = `${percent}%`;
+                    this.progressBtn.style.left = `${left}px`;
+                })
+            }
+        }
+        new Progress('.progress-bar', {
+            style:{
+                width: '80%'
+            }
+        })
+        new Progress('.progress-bar2', {
+            style:{
+                width: '50%'
+            }
+        })
+        new Progress('.progress-bar3', {
+            width: '100px'
+            // 复合属性
+            // flex-grow: 0 | 1     有剩余空间要不要放大
+            // flex-shink: 0 | 1    没有剩余空间要不要缩小
+            // flex-width:          具体 width：值
+            // flex: '0 0 300'
+        })
+    </script>
+</body>
+</html>
