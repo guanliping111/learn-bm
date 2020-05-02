@@ -20,13 +20,14 @@
     constructor() {
       // 申明属性
       this.state = { // JSON  状态  喜欢 或不喜欢
-        isLiked: false  // bool
+        isLiked: false,  // bool
+        number:12
       }
     }
-    render() {
-      this.el = createDOMFromString(`
+    render() {// <span class='like-text'>${this.state.isLiked?'取消':'点赞'}</span>
+      this.el = createDOMFromString(` 
         <button id='like-btn'>
-          <span class='like-text'>${this.state.isLiked?'取消':'点赞'}</span>
+          <span class='like-text'>${this.state.isLiked?('已点赞'+ this.state.number--) :('点赞' + this.state.number++)}</span>
         </button>
       `);
       this.el.addEventListener('click', this.changeLikeText.bind(this), false);
@@ -34,7 +35,8 @@
     }
     changeLikeText() {
       this.setState({
-        isLiked: !this.state.isLiked
+        isLiked: !this.state.isLiked,
+        number: this.state.number
       })
     }
     // 点赞 取消  状态函数
