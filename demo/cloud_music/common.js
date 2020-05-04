@@ -9,9 +9,12 @@ window.onload = function () {
             this.classList.add('selected');
         },false)
     })
-    //先拿到swiper的数据
+    //先拿到swiper的数据  拿到本地数据 fetch
     //拿到bannerList 的数据
     fetch('http://localhost:3000/banner').then(date => date.json()).then(date => {
+        console.log(date);
+    })
+    fetch('http://localhost:3000/swiper').then(date => date.json()).then(date => {
         console.log(date);
     })
 }
