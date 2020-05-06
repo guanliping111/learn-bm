@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* css 4引入variable */
+        /*  根  全局 可复用*/
+        :root {  
+            --bgcolor:blue;
+            --color:red;
+        }
+        p {
+            color: var(--color);/*var 使用变量*/
+        }
+        div{
+            background-color: var(--bgcolor);
+            color: var(--color);
+        }
+    </style>
+</head>
+<body>
+    <p>刘巧纯是富婆</p>
+    <div>要跟富婆做闺蜜。</div>
+</body>
+</html>

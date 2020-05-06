@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三栏布局</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrap{
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer {
+            /* flex-grow  flex-shrink  flex-basis 弹性布局*/
+            /* flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto */
+            flex:0 0 50px;
+        }
+        .content{
+            display: flex;
+            flex-grow: 1;
+        }
+        .main{
+            flex: 1;
+        }
+        .nav, .ads {
+            flex: 0 0 100px;
+            background: green;
+        }
+        .nav {
+            /* 如何到左侧 */
+            /* order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0 */
+            order: -1;
+        }
+    </style>
+</head>
+<body class="wrap">
+    <!-- 三栏布局 面试常考  圣杯布局 -->
+    <!-- 语义化 h5 -->
+    <header>头部</header>
+    <div class="content">
+        <!--  main 放在第一个位置 优先加载-->
+        <main class="main">内容区</main>
+        <nav class="nav">侧边导航</nav>
+        <aside class="asd">侧边栏</aside>
+    </div>
+    <footer>底部</footer>
+</body>
+</html>
