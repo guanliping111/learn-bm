@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            width: 100px;
+            height: 100px;
+            background-color: #666;
+            border-radius: 50%;
+            margin-top: 100px;
+        }
+        ul.stop li:nth-child(1) {
+            background-color: red;
+        }
+        ul.warn li:nth-child(2) {
+            background-color: yellow;
+        }
+        ul.pass li:nth-child(3) {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        const ul = document.querySelector('ul');
+        // setTimeout(function  () {
+        //     ul.className = 'stop';
+        //     setTimeout(() => {
+        //         ul.className = 'warn';
+        //         setTimeout(() => {
+        //             ul.className = 'pass';
+        //             setTimeout(() => {
+        //                 ul.className = 'stop';
+        //             },2000)
+        //         },1000)
+        //     },1000)
+        // },1000)
+
+        //回调地狱
+
+
+    //promise
+    //异步
+    //同步：同步只能等他实现完  后面的才能实现
+    //1：回调
+    setTimeout(() => {
+
+    },1000)
+    //promise 是一个类
+    // let p = new Promise(function(resolve,reject) {
+    //     setTimeout(() => {
+    //         resolve();
+    //         //reject();
+    //         //成功 fulfilled
+    //         //失败 rejected
+    //         //处理中 pending (默认)
+    //         //1.默认 pending -> 如果调用resolve 下一步是fulfilled
+    //         //2.默认 pending -> 如果调用reject 下一步是rejected
+    //     },1000) 
+    // })
+    let p = function(resolve,reject) {
+        //每次调用p函数  都会new一个新的promise
+        return new Promise(function(resolve,reject) {
+            setTimeout(() => {
+                resolve();
+            },1000) 
+        })
+    }
+    
+
+    //1s p fulfilled
+    //p指向的都是同一个promise
+    //成功状态 fulfilled
+    setInterval(() => {
+          light();
+    }, 3000);
+    light();
+    function light() {
+    p().then(function() {
+        ul.className = 'stop';
+        return p();
+    })
+    .then(function() {
+        ul.className = 'warn';
+        return p();
+    })
+    .then(function() {
+        ul.className = 'pass';
+    })
+    //形成.then的串行结构
+    //失败 rejected
+    p().catch();
+}
+    </script>
+
+</body>
+</html>
