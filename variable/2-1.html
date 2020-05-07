@@ -32,6 +32,19 @@
       --base-size:8;
     }
   }
+  /* 大屏设备  >1200  放大20 */
+  @media only screen and (min-width: 1200px) {
+    :root{
+      --base-size:20;
+    }
+  }
+  /* ipad */
+  @media not screen and (min-width: 768
+  px) and (max-width: 1024px) {
+    .box{
+      --base-size:15;
+    }
+  }
   /* 当手机浏览时，请把box 宽 高 padding大小 */
   /* 等比例缩放80% 在变量上做文章*/
   </style>
