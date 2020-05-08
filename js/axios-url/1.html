@@ -1,0 +1,26 @@
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script>
+    //http://neteasecloudmusicapi.zhaoboy.com/search?keywords=海阔天空
+    //https://juejin.im/search?query=js&type=all&user=xxx
+    let params = {
+        query: 'js',
+        type: 'all'
+    }
+    params.user = 'xxx'
+    //删掉query=js
+    delete params.query;
+    let obj = {
+        keywords: '海阔天空'
+    }
+    //axios  第三方 基于XMLhttprequest库
+    axios({
+        methods: 'get',
+        url: 'http://neteasecloudmusicapi.zhaoboy.com/search',
+        params: obj
+    })
+    .then(function(res) {
+        console.log(res);
+    })
+    //有了url 有了对象
+    //对象每一个key value 用url的规则拼接到url后面
+</script>
