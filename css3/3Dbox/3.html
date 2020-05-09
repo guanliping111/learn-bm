@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D盒子</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 100vh;
+            background-image: linear-gradient(#74b9ff, #ffeaa7);
+        }
+        .cube{
+           position: relative;
+           width: 100px;
+           height: 100px;
+           margin: 100px auto 0;
+           /* border: 2px solid red; */
+           transform-style: preserve-3d;
+           animation:  roll 10s linear infinite;
+        }
+        @keyframes roll {
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+        .face{
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            box-shadow: 0 0 20px blue inset;
+            text-align: center;
+            line-height: 300px;
+            font-size: 50px;          
+            perspective: 1000px;
+            transform: .6s linear;
+        }
+        .cube:hover .face:nth-child(1) {
+            transform: rotateX(90deg) translateZ(150px) scale(0);
+            /* background-color: lightgreen;
+            animation: move 2s linear infinite; */
+        }
+        /* @keyframes move {
+            0%{
+                transform: rotateX(0deg) translateZ(0px);
+            }
+            50%{
+                transform: rotateX(90deg) translateZ(0px);
+            }
+            100%{
+                transform: rotateX(90deg) translateZ(150deg);
+            }
+        } */
+        .cube .face:nth-child(2) {
+            transform: rotateX(-90deg) translateZ(150px) scale(0);
+        }
+        .cube .face:nth-child(3) {
+            transform: rotateY(-90deg) translateZ(150px) scale(0);
+        }
+        .cube .face:nth-child(4) {
+            transform: rotateY(90deg) translateZ(150px) scale(0);
+        } 
+        .cube .face:nth-child(5) {
+            transform: translateZ(150px) scale(0);
+        }
+        .cube .face:nth-child(6) {
+            transform: rotateY(150deg) scale(0);
+
+        }
+        .cube:hover .face:nth-child(1) {
+            transform: rotateX(90deg) translateZ(150px) ;
+        }
+        .cube:hover .face:nth-child(2) {
+            transform: rotateX(-90deg) translateZ(150px) ;
+        }
+        .cube:hover .face:nth-child(3) {
+            transform: rotateY(-90deg) translateZ(150px);
+        }
+        .cube:hover .face:nth-child(4) {
+            transform: rotateY(90deg) translateZ(150px);
+        } 
+        .cube:hover .face:nth-child(5) {
+            transform: translateZ(150px) ;
+        }
+        .cube:hover .face:nth-child(6) {
+            transform: rotateY(150deg) ;
+        }
+    </style>
+</head>
+<body>
+    <div class="cube">
+        <div class="face">上</div>
+        <div class="face">下</div>
+        <div class="face">左</div>
+        <div class="face">右</div>
+        <div class="face">前</div>
+        <div class="face">后</div>
+    </div>
+</body>
+</html>
