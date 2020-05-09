@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/guanliping111/learn-1#readme",
   "dependencies": {
+    "koa": "^2.11.0",
     "uuid": "^7.0.3"
   }
 }
