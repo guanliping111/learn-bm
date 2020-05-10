@@ -15,6 +15,8 @@
         }
         .cube{
            position: relative;
+           top: 50%;
+           left: 0;
            width: 100px;
            height: 100px;
            margin: 100px auto 0;
@@ -23,27 +25,31 @@
            animation: roll 10s linear infinite;
         }
         @keyframes roll {
-            from {
+           from{
                 transform: rotateX(0deg) rotateY(0deg);
+            }
+            50% {
+                transform: rotateX(180deg) rotateY(180deg);
             }
             to {
                 transform: rotateX(360deg) rotateY(360deg);
             }
+
         }
         .face{
             position: absolute;
             width: 300px;
             height: 300px;
             box-shadow: 0 0 20px blue inset;
-            background-color: #74b9ff;
+            background-color: #1abc9c;
             text-align: center;
             line-height: 300px;
             font-size: 50px;          
-            perspective: 1000px;
+            perspective: 100px;
             transform: .6s linear;
         }
         .cube .face:nth-child(1) {
-            transform: rotateX(90deg) translateZ(150px) scale(0);
+            transform: rotateX(90deg) translateZ(150px);
             /* background-color: lightgreen;
             animation: move 2s linear infinite; */
         }
@@ -74,7 +80,7 @@
             transform: rotateY(180deg) translateZ(150px);
 
         }
-        .cube:hover .face:nth-child(1) {
+        /* .cube:hover .face:nth-child(1) {
             transform: rotateX(90deg) translateZ(150px) ;
         }
         .cube:hover .face:nth-child(2) {
@@ -91,7 +97,7 @@
         }
         .cube:hover .face:nth-child(6) {
             transform: rotateY(180deg) translateZ(150px) ;
-        }
+        } */
     </style>
 </head>
 <body>
