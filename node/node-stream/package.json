@@ -1,0 +1,15 @@
+{
+  "name": "node-stream",
+  "version": "1.0.0",
+  "description": "代码上线 都是在一台linux 的服务器上面运行\r   - 命令 bash下\r   1. cat: 读取文件内容\r   2. grep: 文本查找  grep linux ./readme.md\r   3. 管道",
+  "main": "copy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
