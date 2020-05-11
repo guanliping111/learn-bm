@@ -27,7 +27,7 @@ var fs = require("fs");
 
 //3.写入文件
 console.log("准备写入文件");
-fs.writeFile('input.txt', '我是通 过fs.writeFile 写入文件的内容',  function(err) {
+fs.writeFile('input-write.txt', '我是通 过fs.writeFile 写入文件的内容',  function(err) {
    if (err) {
        return console.error(err);
    }
