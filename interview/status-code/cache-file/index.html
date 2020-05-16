@@ -6,36 +6,61 @@
   <title>首页</title>
 </head>
 <body>
+    <!-- 作业：设置版本version和users 两个localStorage   缓存并判断服务器更新 -->
   <ul id="users"></ul>
   <script>
     // console.log('localstorage')
     window.onload = function() {
       const usersUL = document.getElementById('users');
       const users = JSON.parse(localStorage.getItem('users'));
-      if (users) {
-        console.log('已经缓存了');
-        usersUL.innerHTML = users.map(user => `
-          <li>
-            ${user.username} - ${user.hometown}
-          </li>
-        `).join('')
-        return;
-      }
-
-
-      //请求数据
-      fetch('/users')
-        .then(data => data.json())
-        .then(data => {
-          localStorage.setItem('users', JSON.stringify(data));//存字符串
-          usersUL.innerHTML = data.map(user => `
-            <li>
-              ${user.username} - ${user.hometown}
-            </li>
-          `).join('')
-        })
+      const version = Number(localStorage.getItem('version'));
+      console.log(version);
+      //但是服务器端内容改变了怎么办?
+      fetch('/version')
+      .then(data => data.json())
+      .then(data => {
+          if(version) {
+              if(version == data) {
+                 console.log('使用本地存储');
+                 if (users) {
+                    console.log('已经缓存了');
+                    usersUL.innerHTML = users.map(user => `
+                    <li>
+                        ${user.username} - ${user.hometown}
+                    </li>
+                    `).join('')
+                    return; 
+                }
+                //请求数据
+                fetch('/users')
+                    .then(data => data.json())
+                    .then(data => {
+                    localStorage.setItem('users', JSON.stringify(data));
+                    usersUL.innerHTML = data.map(user => `
+                        <li>
+                        ${user.username} - ${user.hometown}
+                        </li>
+                    `).join('')
+                    })
+                }
+            }
+            localStorage.setItem('version',JSON.stringify(data));
+            fetch('/users')
+                .then(data => data.json())
+                .then(data => {
+                // console.log(data);
+                localStorage.setItem('users', JSON.stringify(data));
+                usersUL.innerHTML = data.map(user => `
+                <li>
+                    ${user.username} -  ${user.hometown}
+                </li>
+                `).join('');
+            })   
+        })  
     }
-    
+
+    // Etag 发送过去 当再请求时 版本一样 发个304  就会使用客户端的内容
+    //  否则就再次请求并更新版本
   </script>
 </body>
 </html>

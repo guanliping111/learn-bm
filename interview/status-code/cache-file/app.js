@@ -1,21 +1,59 @@
 const http = require('http');
 const fs = require('fs');
 const users = require('./users.json');
-// console.log(users);
-let version = 12345679;
+const version = 12;
 let server = http.createServer((req, res) => {
-  // If-None-Match
-  if (req.url == '/') {
-    res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});
-    fs.createReadStream('index.html').pipe(res);
-  } else if (req.url == '/users') {
-    res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-    // send 文本  Buffer 
-    // JSON 对象变成文本
-    // console.log(typeof JSON.stringify(users));
-    res.end(JSON.stringify(users)) // 怎么把JSON 传过去? 
-  }
+    // console.log(req.url);
+    // If-None-Match
+    if (req.url == '/') {
+        res.writeHead(200, {
+            'Content-Type': 'text.html;charset=utf-8'
+        });
+        fs.createReadStream('./index.html').pipe(res);
+    } 
+    else if(req.url =='/version'){
+        if (req.headers['if-none-match']) {
+            // 判断请求 验证资源是否修改
+            // console.log(Number(req.headers['if-none-match']) == version);
+            if (Number(req.headers['if-none-match']) == version) {
+                res.statusCode = 304; //没有改变版本
+                res.end();
+                return;
+            } 
+            else {
+                res.setHeader('Etag', version);
+                res.end(version.toString());
+                return;
+            }
+        }
+        res.setHeader('Etag', version);
+        //向请求的客户端发送响应头
+        res.writeHead(200, {'Content-Type': 'text.Number;charset=utf-8'});
+        res.end(version.toString());
+    }
+    else if (req.url == '/users') {
+            res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
+            // fs.createReadStream('./users.json').pipe(res);
+            res.end(JSON.stringify(users));
+            // send 文本 Buffer
+            // JSON.stringify() 把JSON 类型 变成文本
+            // console.log(JSON.stringify(users));
+    }
+    // if(req.headers['if-none-match']){
+    //     console.log(Number(req.headers['if-none-match']) == version);
+    //     if(Number(req.headers['if-none-match']) == version){
+    //         res.statusCode = 304;   //没有改变版本
+    //         res.end();
+    //         return;
+    //     }
+    //     else{
+    //         res.setHeader('Etag',version);
+    //         res.end('hello world2');
+    //         return;
+    //     }
+    // }
+    // res.setHeader('Etag','12345678')
+    // res.end('hello world');
 });
-
 
 server.listen(3000);
