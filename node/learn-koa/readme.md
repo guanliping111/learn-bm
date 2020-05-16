@@ -60,3 +60,18 @@ blog 网站
 - writeHead 
 
 
+## 引入koa-static 处理静态资源
+- 方法1 
+```js
+if (ctx.request.url === '/liying.jpg') {
+    ctx.response.type = 'image';//css html
+    ctx.response.body = fs.createReadStream('./liying.jpg');  //./common.css
+
+```
+- 方法2  koa-static  静态引入
+ 1. 安装依赖库 
+  npm install koa-static
+ 2.  在index.js引入依赖库：
+  const KoaStatic = require('koa-static');
+ 3. 使用koastatic, 我们在index.js注掉方式一的代码，在其后添加如下代码
+  app.use(KoaStatic('./'));
