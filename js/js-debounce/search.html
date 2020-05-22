@@ -12,22 +12,23 @@
     <input type="text" id="search3">
     <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
     <script>
+        //针对单独事件
         const search = document.getElementById('search');
         let timeout;
-        function handlesearch(event) {
+        function handlesearch(event) {//发请求
             if(timeout) {
                 clearTimeout(timeout);
             }
             timeout = setTimeout (() => {
                 console.log( event.target.value);
-            },1000)
+            },600)
             //用户连续输入就连续触发  还没输入完 没必要请求 => 防抖
             //电梯
         }
         //防抖  setTimeout
-        search.addEventListener('input',handlesearch);
+        search.addEventListener('input',handlesearch);//绑定事件
 
-        //let timeout1;
+        //let timeout1; 
         let handlemousemove = function() {
             //if(timeout1) {
                // clearTimeout(timeout1);
@@ -36,10 +37,12 @@
                 console.log('handlemousemove'); 
             //},600)
         }
-        //有防抖功能
+        //有防抖功能  
+        //别人设计的防抖 api 
         let hasDebounceedMove = _.debounce(handlemousemove,600);
         window.addEventListener('mousemove', hasDebounceedMove);
-        //封装 多个事件防抖
+
+        //封装 多个事件防抖 
         const search1 = document.getElementById('search1');
         search1.addEventListener('input',debounce( function (e)  {
             console.log(this);
@@ -49,15 +52,19 @@
         //1.let timeout
         //2. if(timeout)  clear
         //3. timeout = setTime
+        //模仿 防抖 优化
         //func 没有防抖功能
         function debounce(func, wait) {
             let timeout;
-            //具有防抖功能
+            //写一个具有防抖功能的自己内部定义的函数function
             return function(event) {
               if(timeout) {
                 clearTimeout(timeout);
               }
-            timeout = setTimeout (() => {
+            timeout = setTimeout (() => {//定时器
+                //写要实现的功能
+                // this默认指向window
+                //使this 指向return function这个函数 用call
                 func.call(this, event)
             },wait)
           }
