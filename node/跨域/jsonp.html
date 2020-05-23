@@ -1,0 +1,17 @@
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function onResponse(posts){
+        console.log(posts);
+    }
+</script>
+<!-- 后端返回结果 -->
+<!-- 发生调用 
+    请求完毕之后 得到 
+    字符串：onResponse(['js', 'php'])
+-->
+<script src="http://localhost:9090/api"></script>
+<script>
+    $.getJSON('http://localhost:9090/api?callback=onResponse', {a:1,b:2}, function(data) {
+        console.log(data);
+    })
+</script>

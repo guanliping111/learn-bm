@@ -1,0 +1,14 @@
+const http = require('http');
+
+
+http.createServer((req, res) => {
+  if (req.path === '/api') {
+    let posts = ['js', 'php'];
+    let mathodName = req.
+    //res.end(JSON.stringify(posts));
+    res.end(`onResponse(${JSON.stringify(posts)})`)
+  }
+})
+.listen(9090, () => {
+  console.log(9090);
+})

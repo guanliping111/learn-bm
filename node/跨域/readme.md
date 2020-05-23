@@ -11,6 +11,7 @@
 1): 请求方式只能是：head，get，post
 2): 请求头允许的字段：Accept，Accept-Language，Content-Language，Last-Event-ID
 Content-Type：application/x-www-form-urlencoded、multipart/form-data、text/plain 三选一
+- 非简单请求
 
 CORS: cross origin resouce share
  1. Content-Type
@@ -20,3 +21,9 @@ CORS: cross origin resouce share
  5. Access-Control-Max-Age
  6. Access-Control-Allow-Headers
  7. Access-Control-Allow-Credentials
+
+ ## jsonp
+  不受跨域限制
+
+  1. jsonp 后端给你返回的是什么
+  
