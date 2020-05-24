@@ -5,12 +5,12 @@
     // xhr fetch
     // 接口 api
     // js 写入 cookie
-     // 真实请求：POST /api 
-    // 1 -> 预检preflight, 试探一下我们跨域能不能通过   2 -> POST /api
     document.cookie = 'abc=123';
+    // 真实请求：POST /api 
+    // 预检请求： 1 -> 预检preflight, 试探一下我们跨域能不能通过   2 -> POST /api
     axios ({
-        withCredentials: true,
-        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        withCredentials: true,//是axios的语法
+        headers: {'X-Requested-With': 'XMLHttpRequest'},//自己加的请求头 有跨域限制
         url:'http://localhost:9090/api',
         method:'POST',  // 传给
         data:{

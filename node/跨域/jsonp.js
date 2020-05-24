@@ -1,12 +1,16 @@
 const http = require('http');
-
-
+const url = require('url');
 http.createServer((req, res) => {
-  if (req.path === '/api') {
+  // /api?callback=onResponse
+  if (req.url.includes('/api')) {
+    let myurl = url.parse(req.url);
+    // console.log(myurl);
+    let params = new URLSearchParams(myurl.query)
     let posts = ['js', 'php'];
-    let mathodName = req.
-    //res.end(JSON.stringify(posts));
-    res.end(`onResponse(${JSON.stringify(posts)})`)
+    // console.log(req);
+    let mathodName = params.get('callback');
+    // res.end(JSON.stringify(posts));
+    res.end(`${mathodName}(${JSON.stringify(posts)})`)
   }
 })
 .listen(9090, () => {
