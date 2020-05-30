@@ -7,10 +7,31 @@ let htmlStr = `<html>
 // 可以：KMP 正则 原理都是 FSM
 // 正则 split(): 完整的 html 
 // token: html tag
+
 let currentToken = null;
+//栈
+let stack = [ {type: 'document', children: []} ]
 parse(htmlStr);
+console.log(JSON.stringify(stack[0], null, 2));
 function emit(token) {
-  console.log(token);
+  //1：遇到开始标签入栈，同时把这个标签最作为栈顶元素的字节点
+  //2：遇到结束标签就 出栈
+  let top = stack[stack.length - 1];
+  if(token.type === 'startTag') {//开始标签处理配对
+    // push  pop 
+    let element = {
+      type: 'element',
+      children: [],
+      attributes: [],
+      tagName: token.tagName
+    }
+    stack.push(element);
+    // 作为栈顶的元素子节点，为了生成树
+    // if (!top.children) top.children = [];
+    top.children.push(element);
+  }else if(token.type === 'endTag') {//结束标签
+    stack.pop();
+  }
   currentToken = null;
 }
 function parse(htmlString) {
