@@ -1,157 +1,226 @@
-let htmlStr = `<html>
-  <head></head>
-  <body>
-    <img a="a" b="b"/>
-    <span></span>
-    <div class="cls" id="myid"></div>
-  </body>
+const css = require('css');
+let htmlStr = `
+<html>
+    <head></head>
+    <body>
+        <img src="src"/>
+        <span></span>
+        <div class="cls" id="myid"></div>
+    </body>
 </html>`
-// 可以：KMP 正则 原理都是 FSM
-// 正则 split(): 完整的 html 
-// token: html tag
 let cssStr = `
-.cls {
-  font-size: 16px;
+.parent .cls {
+    font-size: 16px;
 }
 #myid {
-  background-color: red;
-}
-`
+    background-color: red;
+}`
 let rules = css.parse(cssStr).stylesheet.rules;
-let currentToken = null;
+// console.log(JSON.stringify(rules, null, 2));
+
 let currentAttribute = null;
-//声明栈
-let stack = [ {type: 'document', children: []} ]
+let currentToken = null;
+let stack = [{
+    type: 'document',
+    children: []
+}]
 parse(htmlStr);
-function computerCss(ele) {
-  
-}
-console.log(JSON.stringify(stack[0], null, 2));
-function emit(token) {
-  //1：遇到开始标签入栈，同时把这个标签最作为栈顶元素的字节点
-  //2：遇到结束标签就 出栈   
-  let top = stack[stack.length - 1];
-  if(token.type === 'startTag') {//开始标签处理配对
-    // push  pop 
-    let element = {
-      type: 'element',
-      children: [],
-      attributes: token.attributes,
-      tagName: token.tagName
+
+function match(selector, ele) {
+    if (!selector || !ele.attributes){
+        return false;
     }
-    computerCss(element);
-    stack.push(element); //入栈
-    // 作为栈顶的元素子节点，为了生成树
-    // if (!top.children) top.children = [];
-    top.children.push(element);
-  }else if(token.type === 'endTag') {//结束标签
-    if(token.tagName !== top.tagName) { //判断标签是否配对
-      throw new Error('tagName match error')
+    //  #myid
+    // {name：id, value: 'myid‘}
+    if (selector.charAt(0) === "#"){
+        let idAttr = ele.attributes.find(e => e.name === 'id');
+        if (idAttr && idAttr.value === selector.replace('#','')) return true;
+    }else if (selector.charAt(0) === "."){
+        let classAttr = ele.attributes.find(e => e.name === 'class');
+        if (classAttr && classAttr.value === selector.replace('.','')) return true;
     }else{
-      stack.pop(); //配对成功 移除
+        if (ele.tagName === selector) return true;
     }
-  } else if (token.type === 'selfCloseToken') {
-    let element = {
-      type: 'element',
-      children: [],
-      attributes: token.attributes,
-      tagName: token.tagName
-    }
-    top.children.push(element);
-  }
-  currentToken = null;
+    return false;
 }
+
+function computerCss(ele) {
+    // 计算 符合这个 ele 的所有 css 规则， css 规则 应用到这个节点上面
+    // 1：靠 ele 属性 父节点， 和 css 里面 选择器 匹配
+    // 2：如何匹配？ 浏览器： 从后往前匹配 提高效率 
+    let elements = stack.slice(0).reverse;  // 浅复制一份来并翻转
+    if (!ele.computerStyle) ele.computerStyle = {}
+    for (let rule of rules){
+        let selector = rule.selectors[0].split(' ').reverse();
+        // console.log('selector',selector);
+        // 最后一项匹配上了
+        if (!match(selector[0], ele)){
+            // 跳过本轮循环， 往后的步骤
+            continue;
+        }
+        // 看父级满不满足
+        //  先翻转 然后从后往前遍历匹配
+        // [{type: 'doc'}, {html}, [header]]
+        // [#id .parent #parentID span]
+        let j = 1;
+        for (let i = 0; i < elements.length; i++) {
+            if (match(selector[j],elements[i])) j++;
+        }
+        // 匹配
+        if (j >= selector.length) {
+            // rule rule css 规则添加到 ele
+            for (let delecare of rule.declarations){
+                const { property, value } = delecare;
+                ele.computerStyle[property] = value;
+            }
+        }
+    }
+}
+console.log(JSON.stringify(stack[0], null, 2)); // 序列化加两个空格
+function emit(token) {
+    // console.log(token);
+    // 拿到栈顶元素
+    let top = stack[stack.length - 1];
+    if (token.type === 'startTag') {
+        // push pop 处理配对
+        let element = {
+            type: 'element',
+            children: [],
+            attributes: token.attributes,
+            tagName: token.tagName
+        }
+        // 知道 attributes, 知道栈 stack 里面的元素是 element 的父节点。计算 css 
+        computerCss(element); // 明确知道 element 的父节点
+        stack.push(element);
+        // 作为栈顶元素的子节点， 为了生成树
+        // if (!top.children) top.children = [];
+        // 引用地址 都会更新
+        top.children.push(element);
+    } else if (token.type === 'endTag') {
+        if (token.tagName !== top.tagName) {
+            throw new Error('tagName match error');
+        } else {
+            stack.pop();
+        }
+    } else if (token.type === 'selfCloseToken') {
+        let element = {
+            type: 'element',
+            children: [],
+            attributes: token.attributes,
+            tagName: token.tagName
+        }
+        top.children.push(element);
+    }
+    currentToken = null;
+}
+
 function parse(htmlString) {
-  state = start;
-  for (let c of htmlString) {
-    state = state(c);
-  }
+    state = start;
+    for (let c of htmlString) {
+        state = state(c);
+    }
 }
+
 function start(c) {
-  if (c === '<') {
-    return tagOpen
-  } else {
-    return start
-  }
+    if (c === '<') {
+        return tagOpen;
+    } else {
+        return start;
+    }
 }
+
 function tagOpen(c) {
-  // <html>: html tag 由 a-zA-Z  div span p 
-  // </html>
-  //  h t m l
-  // console.log(c);
-  if (c === '/') {
-    return endTagOpen
-  } else if (c.match(/[a-zA-Z]/)) {
-    currentToken = {
-      type: 'startTag',
-      tagName: c
+    // <html>: html tag 由a-z, A-Z 组成 
+    // </html>
+    // h t m l
+    if (c === '/') {
+        return endTageOpen;
     }
-    return tagName
-  }
+    // ^ 起点 $ 终点
+    else if (c.match(/^[a-zA-Z]$/)) {
+        currentToken = {
+            type: 'startTag',
+            tagName: c
+        }
+        return tagName;
+    }
 }
+
 function tagName(c) {
-  if (c.match(/[a-zA-Z]/)) {
-    currentToken.tagName += c;
-    return tagName
-  } else if (c.match(/[\t\n\f ]/)) {
-    return beforeAttaibuteName
-  } else if (c === '>') {
-    // tag 拼接结束
-    emit(currentToken);
-    return start
-  }
-}
-function beforeAttaibuteName(c) {
-  if (c === '/') {//自闭合标签
-    currentToken.type = 'selfCloseToken';
-    return tagName;
-  }else if (c.match(/[a-zA-Z]/)) {
-    currentAttribute = {
-      name: c,
-      value: ''
+    if (c.match(/^[a-zA-Z]$/)) {
+        // 拼接
+        currentToken.tagName += c;
+        return tagName;
+    } else if (c.match(/[\t\n\f ]/)) {
+        return beforeAttributeName;
+    } else if (c === '>') {
+        // tag 拼接结束
+        emit(currentToken);
+        return start;
     }
-    return attributeName;
-  }else if(c.match(/[\t\n\f ]/)) {
-    return beforeAttaibuteName;
-  }else if(c === '>') {
-    return tagName(c);
-  }
 }
+
+function beforeAttributeName(c) {
+    if (c === '/') {
+        // 自闭合
+        currentToken.type = 'selfCloseToken';
+        return tagName;
+    } else if (c.match(/^[a-zA-Z]$/)) {
+        currentAttribute = {
+            name: c,
+            value: ''
+        }
+        return attributeName;
+    }else if (c.match(/[\t\n\f ]/)){
+        // 喻导空格消耗掉 不做任何处理
+        return beforeAttributeName;
+    }else if (c === '>') {
+        return tagName(c);
+    }
+}
+
 function attributeName(c) {
-  //class="cla"
-  if (c.match(/[a-zA-Z]/)) {
-    currentAttribute.name += c;//拼接
-    return attributeName;
-  }else if(c === '=') {
-    return attributeValue;
-  }
-}
-function attributeValue(c) {
-  // <div class="cls" id="myid" a="b"></div>
-  if (c === '\"') {
-    // nothing
-    return attributeValue;
-  } else if (c.match(/[a-zA-Z]/)) {
-    currentAttribute.value += c;
-    return attributeValue;
-  } else {
-    // 空格 >
-    // 消耗了
-    if (!currentToken.attributes) currentToken.attributes = [];
-    currentToken.attributes.push(currentAttribute);
-    currentAttribute = null;
-    // 代理
-    // 本状态内部处理完毕了这个 c，下一个状态也要针对 c 处理
-    // 本状态内部处理完毕了这个 c，下一个状态处理到的字符就是 c 的后一个 字符
-    return beforeAttaibuteName(c);
-  }
-}
-function endTagOpen(c) {
-  if (c.match(/[a-zA-Z]/)) {
-    currentToken = {
-      type: 'endTag',
-      tagName: c
+    if (c.match(/^[a-zA-Z]$/)) {
+        currentAttribute.name += c;
+        return attributeName;
+    }else if (c === '=') {
+        return attributeValue;
     }
-    return tagName;
-  }
+}
+
+function attributeValue(c){
+    // <div class="cls" id="myid"></div>
+    // 如果遇到了双引号 自身调用自身 消耗掉这个双引号
+    if (c === '\"') {
+        // nothing
+        return attributeValue;
+    }
+    else if (c.match(/^[a-zA-Z]$/)) {
+        currentAttribute.value += c;
+        return attributeValue;
+    }
+    else {
+        // 要么是空格 要么是大于号 >
+        // 消耗了这两个字符
+        if (!currentToken.attributes) currentToken.attributes = [];
+        currentToken.attributes.push(currentAttribute);
+        currentAttribute = null;
+        // 加 () 代理
+        // 在本状态内部处理完毕了这个字符c， 下一个状态也要针对这个字符 c 处理
+        return beforeAttributeName(c);
+        // 不加 ()
+        // 在本状态内部处理完毕了这个字符c， 下一个状态处理到的字符就是 c 的后一个字符。
+        // return beforeAttributeName;
+    }
+}
+
+function endTageOpen(c) {
+    // </html>
+    if (c.match(/^[a-zA-Z]$/)) {
+        currentToken = {
+            type: 'endTag',
+            tagName: c
+        }
+        return tagName;
+    }
 }

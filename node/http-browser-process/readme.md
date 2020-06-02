@@ -31,6 +31,19 @@ Infinaty
 ## 浏览器 匹配css规则
 按照css选择器 从后往前匹配
 
+## layout
+display: flex | block | inlink-block | grid
+justify-content: center
+float:
+position:
+## 正常的文档流
+脱离文档流： 
+
+## normal flow
+行内元素: 水平方向 从左往右一个接着一个布局，垂直方向 默认会以baseline对齐
+块级元素：垂直方向 从上往下布局
+relative 定位
+
 
 
 

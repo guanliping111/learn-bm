@@ -1,14 +1,14 @@
 {
-  "type": "document",       
+  "type": "document",
   "children": [
     {
-      "type": "element",    
+      "type": "element",
       "children": [
         {
           "type": "element",
-          "children": [],   
-          "attributes": [], 
-          "tagName": "head"
+          "children": [],
+          "tagName": "head",
+          "computerStyle": {}
         },
         {
           "type": "element",
@@ -16,28 +16,45 @@
             {
               "type": "element",
               "children": [],
-              "attributes": [],
+              "attributes": [
+                {
+                  "name": "src",
+                  "value": "src"
+                }
+              ],
               "tagName": "img"
             },
             {
               "type": "element",
               "children": [],
-              "attributes": [],
-              "tagName": "span"
+              "tagName": "span",
+              "computerStyle": {}
             },
             {
               "type": "element",
               "children": [],
-              "attributes": [],
-              "tagName": "div"
+              "attributes": [
+                {
+                  "name": "class",
+                  "value": "cls"
+                },
+                {
+                  "name": "id",
+                  "value": "myid"
+                }
+              ],
+              "tagName": "div",
+              "computerStyle": {
+                "background-color": "red"
+              }
             }
           ],
-          "attributes": [],
-          "tagName": "body"
+          "tagName": "body",
+          "computerStyle": {}
         }
       ],
-      "attributes": [],
-      "tagName": "html"
+      "tagName": "html",
+      "computerStyle": {}
     }
   ]
 }
