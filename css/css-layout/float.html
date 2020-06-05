@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap {
+            border: 1px solid #000;
+            overflow: hidden;
+            /* 清除浮动： 运用Bfc的规则 */
+        }
+        .main{
+            width: 40px;
+            height: 200px;
+            background-color: green;
+            float: left;
+            /* float： 浮动在其所在的块容器最左边
+               允许文本和内联元素环绕它
+            */
+        }
+        .aside {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="main">main</div>
+        <div class="aside">aside
+            <br />
+            aside
+            <br />
+            aside
+            <br />
+            aside
+        </div>
+    </div>
+</body>
+</html>
