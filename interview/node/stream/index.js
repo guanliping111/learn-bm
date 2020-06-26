@@ -12,7 +12,7 @@
 // console.log(buf.toString());
 
 // hello world 他的缓冲区格式， 怎么做？ 
-// con sole.log(buf.write('hello world'));
+// console.log(buf.write('hello world'));
 // 最关键的地方是什么？ 存储的本质 内存 物理单元 
 // 高层的string   ->   底层的Buffer  
 // 分步思维
@@ -21,11 +21,10 @@
 // 3. Buffer from 
 
 const array = 'hello world'.split('').map(function(v) {
-    return '0x' + v.charCodeAt(0).toString(16)
-  }) 
-  console.log(array);
-  const buf = Buffer.from(array);
-  console.log(buf.toString());
-  // console.log(array);
-  
-  
+  return '0x' + v.charCodeAt(0).toString(16)
+})
+console.log(array);
+const buf = Buffer.from(array);
+console.log(buf.toString());
+// console.log(array);
+
