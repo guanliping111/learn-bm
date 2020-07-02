@@ -19,7 +19,8 @@
         //渲染节点的入口  node cssStyleSheet
         //-webkit-font-smothing
         //filter webkit
-        console.log(Object.keys(document.body.style.length));
+        console.log(Object.keys(document.body.style).filter((e) => !e.match(/^webkit/)));
+        //console.log(Object.keys(document.body.style.length));
     </script>
 </body>
 </html>
