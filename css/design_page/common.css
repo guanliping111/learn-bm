@@ -137,6 +137,7 @@ form {
 input, button, textarea, select {
     *font-size: 100%;
 }
+input, button, textarea, select, optgroup, option {
     font-family: inherit;
     font-size: inherit;
     font-style: inherit;
@@ -171,4 +172,23 @@ input, button, textarea, select {
     background-position: calc(50% - 305px) top;
     background-repeat: no-repeat;
     background-color: #edf4ed;
+} 
+#anony-reg-new .wrapper{
+    position: relative;
+    padding: 0 0 4px;
+    overflow: visible;
+    zoom: 1;
+}
+.wrapper {
+    width: 950px;
+    margin: 0 auto;
+}
+#anony-reg-new .wrapper:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
 }
