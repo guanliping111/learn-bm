@@ -37,26 +37,34 @@
             </form>
         </div>
     </div>
-    <div class="anony-reg-new" style="background-image: url(https://img9.doubanio.com/view/puppy_image/raw/public/16ad990ec23uwn790d4.jpg)">
+    <div id="anony-reg-new" style="background-image: url(https://img9.doubanio.com/view/puppy_image/raw/public/16ad990ec23uwn790d4.jpg)">
         <div class="wrapper">
             <div class="login">
-                <iframe style="height: 300px; width: 300px;" frameborder="0" src="//accounts.douban.com/passport/login_popup?login_source=anony"></iframe>
+              <iframe style="height: 300px; width: 300px;" frameborder="0" src="//accounts.douban.com/passport/login_popup?login_source=anony"></iframe>
             </div>
             <div class="app">
-                <p class="app-title">豆瓣<span>6.0</span></p>
-                <p class="app-slogan"></p>
-                <a href="#" class="lnk-app">下载豆瓣 App</a>
-                <div class="app-qr">
-                    <a href="#" class="lnk-qr" id="expand-qr"> 
-                        <img src="https://img3.doubanio.com/f/sns/0c708de69ce692883c1310053c5748c538938cb0/pics/sns/anony_home/icon_qrcode_green.png" width="28" height="28">
-                    </a>
-                    <div class="app-qr-expand">
-                        <img src="https://img3.doubanio.com/f/sns/1cad523e614ec4ecb6bf91b054436bb79098a958/pics/sns/anony_home/doubanapp_qrcode.png" width="160" height="160">
-                        <p>iOS / Android 扫码直接下载</p>
-                    </div>
+              <p class="app-title">豆瓣<span>6.0</span></p>
+              <p class="app-slogan"></p>
+              <a href="https://www.douban.com/doubanapp/app?channel=nimingye" class="lnk-app">下载豆瓣 App</a>
+              <div class="app-qr">
+                <a href="javascript: void 0;" class="lnk-qr" id="expand-qr"><img src="https://img3.doubanio.com/f/sns/0c708de69ce692883c1310053c5748c538938cb0/pics/sns/anony_home/icon_qrcode_green.png" width="28" height="28"></a>
+                <div class="app-qr-expand">
+                  <img src="https://img3.doubanio.com/f/sns/1cad523e614ec4ecb6bf91b054436bb79098a958/pics/sns/anony_home/doubanapp_qrcode.png" width="160" height="160">
+                  <p>iOS / Android 扫码直接下载</p>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
+        <script>
+            Do(function() {
+              var app_qr = $('.app-qr');
+              app_qr.hover(function() {
+                app_qr.addClass('open');
+              }, function() {
+                app_qr.removeClass('open');
+              });
+            });
+            </script>
     </div>
 </body>
 </html>

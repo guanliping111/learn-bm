@@ -2,6 +2,23 @@ html {
     color: #111111;
     background: #fff;
 }
+body{
+    padding-top: 30px;
+}
+body, td, th {
+    font: 12px Helvetica,Arial,sans-serif;
+    line-height: 1.62;
+}
+element.style {
+    background-image: url(https://img9.doubanio.com/view/puppy_image/raw/public/16ad990ec23uwn790d4.jpg);
+}
+body, div, dl, dt, dd, ul, li, h1, 
+h2, h3, h4, h5, h6, pre, code, form, 
+fieldset, legend, input, button, textarea, blockquote{
+    margin: 0;
+    padding: 0;
+}
+
 ul, ol {
     list-style:none;
 }
@@ -26,11 +43,6 @@ input {
 }
 input {
      font-size: 12px;
-}
-
-body, div, dl, dt, dd, ul, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, blockquote{
-    margin: 0;
-    padding: 0;
 }
 
 body, td, th {
@@ -67,10 +79,6 @@ body {
     vertical-align: middle;
     /* 雪碧图 */
     background: transparent url(https://img3.doubanio.com/f/sns/8536084688879cb1137e8efdff30e59614ff2f86/pics/sns/anony_home/anony_nav_logo.png) no-repeat 100% 100%;
-    /* background-image: -webkit-image-set(url(https://img3.doubanio.com/f/sns/8536084…/pics/sns/anony_home/anony_nav_logo.png) 1x, url(/f/sns/82c3a65…/pics/sns/anony_home/anony_nav_logo@2x.png) 2x);
-    background-image: -moz-image-set(url(https://img3.doubanio.com/f/sns/8536084…/pics/sns/anony_home/anony_nav_logo.png) 1x, url(/f/sns/82c3a65…/pics/sns/anony_home/anony_nav_logo@2x.png) 2x);
-    background-image: -ms-image-set(url(https://img3.doubanio.com/f/sns/8536084…/pics/sns/anony_home/anony_nav_logo.png) 1x, url(/f/sns/82c3a65…/pics/sns/anony_home/anony_nav_logo@2x.png) 2x);
-    background-image: -o-image-set(url(https://img3.doubanio.com/f/sns/8536084…/pics/sns/anony_home/anony_nav_logo.png) 1x, url(/f/sns/82c3a65…/pics/sns/anony_home/anony_nav_logo@2x.png) 2x); */
 }   
 #anony-nav .anony-nav-links li .link-book{
     background-position:0 0;
@@ -201,7 +209,7 @@ input, button, textarea, select, optgroup, option {
     background-position: calc(50% - 305px) top;
     background-repeat: no-repeat;
     background-color: #edf4ed;
-} 
+}
 #anony-reg-new .wrapper{
     position: relative;
     padding: 0 0 4px;
@@ -212,7 +220,7 @@ input, button, textarea, select, optgroup, option {
     width: 950px;
     margin: 0 auto;
 }
-#anony-reg-new .wrapper:before{
+#anony-reg-new .wrapper:before {
     content: "";
     position: absolute;
     top: 0;
@@ -234,6 +242,7 @@ input, button, textarea, select, optgroup, option {
 }
 #anony-reg-new .wrapper .login, 
 #anony-reg-new .wrapper .app{
+    /* 元素的堆叠顺序 */
     z-index: 2;
 }
 #anony-reg-new .wrapper .login {
@@ -281,5 +290,66 @@ iframe{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizelegibility;
+
 }
+/* 下载豆瓣 App */
+#anony-reg-new .lnk-app{
+    display: inline-block;
+    *display: inline;
+    padding: 9px 21px;
+    margin-right: 2px;
+    vertical-align: 2px;
+    border-radius: 2px;
+    font-size: 12px;
+    background: #00B51D;
+    color: #FFF;
+    line-height: 1;
+}
+#anony-reg-new .lnk-app:link, 
+#anony-reg-new .lnk-app:visited, 
+#anony-reg-new .lnk-app:hover,
+#anony-reg-new .lnk-app:active{
+    background: #00B51D;
+    color: #FFF;
+} 
+/* 小绿二维码 */
+#anony-reg-new .app-qr{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    position: relative;
+}
+#anony-reg-new .lnk-qr{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    border: 1px solid #48aa0d;
+    border-radius: 2px;
+}
+#anony-reg-new .lnk-qr:link, 
+#anony-reg-new .lnk-qr:visited, 
+#anony-reg-new .lnk-qr:hover, 
+#anony-reg-new .lnk-qr:active{
+    background: transparent;
+}
+a img{
+    border-width: 0;
+    vertical-align: middle;
+}
+fieldset, img{
+    border: 0;
+}
+#anony-reg-new .app-qr-expand{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px 20px 5px;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    background: #fff;
+    line-height: 13px;
+    word-spacing: nowrap;
 }
