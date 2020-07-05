@@ -1,6 +1,8 @@
 function createPhoneNumber(numbers) {
     return (
-        
+        '('
+        +
+        numbers[0]
     )
 }
 
