@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dbocument</title> 
+    <style>
+        li + li  {
+            border-left: 1px solid #000;
+        }
+        ul li {
+            color: red;
+        }
+        /* 子选择器 */
+        ul > li {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <script>
+        console.log(document.querySelectorAll( 'li + li'));
+        console.log(a);
+        var a = 1;
+
+        const promise = Promise.resolve(0);//立即 reslove的 Promise
+        const promise1 = Promise.resolve(1);
+        let promise2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(2);
+            },1000)
+            
+        });
+        let promise3 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject(3);
+            },2000)
+            
+        });
+        let promise4 = new Promise((resolve, reject) => {
+            resolve(4);
+        });
+
+        //所有异步任务成功 才算成功
+        Promise.all([promise, promise1, promise2, promise3])  //返回promise
+        .then(res => {
+            console.log(res);
+        })
+        .catch()
+
+        Promise.allSettled([promise, promise1, promise2, promise3])  //返回promise
+        .then(res => {
+            console.log(res);
+        })
+        .catch()
+
+        Promise.race([promise2, promise3]) //返回promise
+        .then(res => {
+            console.log(res);
+        })
+        .catch()
+
+
+        //怎么实现一个 Promise.all
+    </script>
+</body>
+</html>
