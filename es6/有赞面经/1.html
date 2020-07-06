@@ -67,7 +67,16 @@
         .catch()
 
 
-        //怎么实现一个 Promise.all
+        function myInstance(obj, Constructor) {
+            let proto = obj._proto_;
+            if(proto === Constructor.prototype) {
+                return true;
+            }
+            if(proto === null) return false;
+            return myInstance(proto, Constructor);
+        }
+        console.log(myInstance([], Array));
+        console.log(myInstance({}, Object));
     </script>
 </body>
 </html>

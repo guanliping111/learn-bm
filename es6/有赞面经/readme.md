@@ -49,12 +49,23 @@
 - js有哪些类型检查的方法
 
 - instance of在原型链上的查找方式，是递归还是...？
+  语法：object instanceof constructor
+  instanceof 运算符用于检测构造函数的 prototype(constructor.prototype) 属性
+  是否出现在某个实例对象(object )的原型链上。
+
+  1. 判断构造函数上面存不存在 symbol.hasInstance 的方法
+  如果有这个方法，则取这个方法的返回值
+  2. 否则判断 左边这个对象的原型链上面  存不存在 右边这个构造函数的prototype
+ 
 
 - call,bind,apply的区别
 
 - 浏览器事件模型，一个点击按钮点完发生了什么？
+  事件流
 
 - 如何对多个事件进行处理？
+  1. 有一万个 li 节点 给这些节点绑上事件？ 事件代理
+  2. 全局事件（定时器） 一定要清理
 
 - 跨域，同源策略
 

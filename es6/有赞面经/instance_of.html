@@ -1,0 +1,19 @@
+<script>
+    class myArr{
+        static a = 1;
+        // Symbol.hasInstance用于判断某对象是否为某构造器的实例。
+        // 用它自定义 instanceof 操作符在某个类上的行为。
+        static [Symbol.hasInstance]() {
+            return true;
+        }
+        push() {
+            console.log("发生了push");
+        }
+
+    }
+    let arr1 = [];
+    let arr = new myArr();
+    console.log(myArr[Symbol.hasInstance]);
+    console.log(arr instanceof myArr);
+
+</script>
