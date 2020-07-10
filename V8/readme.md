@@ -24,7 +24,7 @@
     JavaScript 仅提升声明，而不提升初始化。
     如果你先使用的变量，再声明并初始化它，变量的值将是 undefined。
 
-    ```
+    ```js
       function do_something() {
       console.log(bar); // undefined
       console.log(foo); // ReferenceError
