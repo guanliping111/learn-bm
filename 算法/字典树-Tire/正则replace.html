@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = 'my name is {name}, age is {age}';
+        let obj = {name: 'lili', age: '17'}
+        str.replace('{name}', 'lili');
+        let reg = /\{([0-9a-zA-Z]+)\}/g;
+        let newStr = str.replace(reg, (...arg) => {//两个参数 1.匹配到了什么 2.拿出来的数据
+            //() 里面的分组拿到
+            console.log(arg);
+            let key = arg[1];
+            // return 'lili';
+            return obj[key];
+        })
+        console.log(newStr); //my name is lili, age is 17
+        
+
+        //YYYY-MM-DD
+        function format(str) {
+            let reg = /(\d{4})-(\d{2})-(\d{2})/;
+            return str.replace( reg,(...arg) => {
+                console.log(arg);
+                //$  匹配输入的结束
+                return `${arg[2]}-${arg[3]}-${arg[1]}`
+            })
+        }
+        format('2017-12-11');  //MM-DD-YYYY
+
+    </script>
+</body>
+</html>

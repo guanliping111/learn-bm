@@ -1,0 +1,14 @@
+<script>
+    let str = 'hello';
+    //^ 匹配开始 字符串前插入 #
+    let newStr = str.replace(/^/, '#'); //插入一个#
+    console.log(newStr); //#hello
+    //(?=) 取位置
+    //(?=l): l前面这个位置插入
+    let str1 = str.replace(/(?=l)/g, '#');
+    console.log(str1); // he#l#lo
+
+    //(?!) 取反位置 与(?=)互补
+    let str2 = str.replace(/(?!l)/g, '#');
+    console.log(str2); //#h#ell#o#
+</script>
