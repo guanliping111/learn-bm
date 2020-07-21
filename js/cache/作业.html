@@ -2,7 +2,12 @@
     Promise.resolve(1).then(console.log);  // ? 1
     let arr = [1,2,3];
     arr.map(parseInt)    // ? [1, NaN, NaN]
+    //map得到的所有参数 都会传给 parseInt   map[num,index]
     //parseInt: 从给定的字符串中解析出的一个整数,或者 NaN
+    parseInt(1,0);  // 10 十进制 1
+    parseInt(2,1);   //2  不是二进制
+    parseInt(3,2);  //3 不是二进制 NaN
+
 
     // Promise.all 当所有的 promise 都完成的时候才认为 resolve
     // 有一个 为 reject 就为 reject
