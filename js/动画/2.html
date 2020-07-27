@@ -1,0 +1,46 @@
+<style>
+    #el {
+        width: 30px;
+        height: 30px;
+        background-color: red;
+        animation: move 5s linear;
+    }
+</style>
+
+<div id="el"></div>
+<button id="pause" onClick="pause();">pause</button>
+<button  onClick="resum();">resum</button>
+
+
+<script>
+    const el = document.getElementById('el');
+    let end = 400, duration = 5000, start = 0;
+    let startTime = Date.now();
+    function tick() {
+        // console.log(1); 
+        let hasPassed = Date.now() - startTime;
+        let progress = hasPassed / duration;
+        if(progress >= 1) {
+            el.style.transform = `translate3d(${end}px, 0, 0)`;
+            return;
+        }
+        let x = progress * (end - start);
+        el.style.transform = `translate3d(${x}px, 0, 0)`;
+        rafId = requestAnimationFrame(tick);
+    }
+    //停止动画 cancelAnimationFrame
+    let rafId = null;
+    rafId = requestAnimationFrame(tick); 
+    //暂停时间
+    var pauseTime = null;
+    function pause() {
+        pauseTime = Date.now(); 
+        cancelAnimationFrame(rafId);
+    }
+    //重启动画
+    function resum() {
+        startTime += Date.now() - pauseTime;
+        rafId = requestAnimationFrame(tick);
+    }
+    //requestAnimationFrame  能够确保回调在每一帧调用
+</script>
