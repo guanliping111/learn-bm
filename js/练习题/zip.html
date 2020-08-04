@@ -1,0 +1,21 @@
+<script>
+    function zip(...args) {
+        console.log(...args)
+        // let arr = Array.from(arg);
+        let res = [];
+        for(let j = 0; j < args[0].length; j ++ ){ //所有数组
+            if(!res[j]) res[j] = [];
+            for(let i = 0; i < args.length; i ++ ) {
+                // console.log(args[i][j]);//拿到每一项的数据 
+                //i在外面  fred barney 30 40 true false
+                //j在外面  fred 30 true barney 40 false
+                res.push(args[i][j]);
+            }
+            // arr2.push(arr1);
+        }
+        return res;
+        console.log(res)
+    }
+    zip(['fred', 'barney'], [30, 40], [true, false]);
+    // => [['fred', 30, true], ['barney', 40, false]]
+</script>

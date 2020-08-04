@@ -1,0 +1,27 @@
+<script>
+//  输入：
+// dateFormat(new Date('2020-12-01'), 'yyyy/MM/dd') // 2020/12/01
+// dateFormat(new Date('2020-04-01'), 'yyyy/MM/dd') // 2020/04/01
+// dateFormat(new Date('2020-04-01'), 'yyyy年MM月dd日') // 2020年04月01日
+// 写一个日期格式化函数
+
+const dateFormat = (dateInput, format)=>{
+    let y = dateInput.getFullYear();
+    let m = dateInput.getMonth()+1;
+    let d = dateInput.getDate();
+    return format = format.replace('yyyy',y).replace('mm',m).replace('dd',d)
+}
+
+console.log(dateFormat(new Date('2020-12-01'), 'yyyy/MM/dd')) // 2020/12/01
+console.log(dateFormat(new Date('2020-04-01'), 'yyyy/MM/dd')) // 2020/04/01
+console.log(dateFormat(new Date('2020-04-01'), 'yyyy年MM月dd日')) // 2020年04月01日
+
+let d = new Date();
+d.getFullYear()
+d.getMonth()+1
+d.getDate()
+// const time = (time = +new Date()) => {
+//         var date = new Date(time + 8 * 3600 * 1000); // 增加8小时
+//         return date.toJSON().substr(0, 19).replace('T', ' ');
+//    }
+</script>
