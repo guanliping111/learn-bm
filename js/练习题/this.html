@@ -1,0 +1,45 @@
+<script>
+    window.name = 'ByteDance';
+    function A() {
+        //   new 过程：
+        //1.生成一个对象： {}
+        //2. {}.__proto__ = A.prototype
+        //3. {} 添加name属性
+        //3. return {}
+
+        //我们new的时候 拿到就是这个{}
+        console.log(this); //指向空的对象{}  A.prototype
+        // debugger
+        // this.name = 123; => 123
+        console.log(this.name);//456   没有name属性 就去原型链A.prototype里面找到 456
+        this.name = 123;
+    }
+    A.prototype.getA = function () {
+        console.log(this);//window
+        return this.name + 1;
+    }
+    A.prototype.name = 456;
+    let a = new A();  //new生成一个实例
+    let funcA = a.getA;
+    //function  默认 this 指向了 window
+    console.log(funcA());  //ByteDance1
+
+    function newConstructor(Constructor) {
+        let obj = {}
+        obj.__proto__ = Constructor.prototype;
+        // 给obj附上属性
+        Constructor.apply(obj);
+        return obj;
+    }
+    newConstructor(A);
+    // A.prototype.__proto__ === Object.prototype
+
+    function Animal() {
+        //this = ani
+        this.name = 'cat';
+        this.live = 'land';
+    }
+    let ani = {};
+    Animal.apply(ani);
+    console.log(ani);
+</script>

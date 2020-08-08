@@ -1,0 +1,39 @@
+<script>
+    let a = { a: 1 };
+    let b = { b: 1 };
+    Object.assign({}, a, b) // ...
+    let map = new Map()
+    //map是key 可以是任意值
+    //object {} key 字符串 Symbol
+    function deepClone(obj) {
+        //obj 待拷贝的对象
+        //t 拷贝完的结果
+        let t = {};
+        if (map.get(obj)) return map.get(obj);
+        map.set(obj, t);
+        Object.key[obj].forEach(k => {
+            if (typeof obj[k] === 'object') {
+                // t[k] = obj[k];
+                t[k] = deepClone(obj[k]);
+            }
+            else {
+                t[k] = obj[k];
+            }
+        })
+        return t;
+    }
+    let obj = {
+        a: 1,
+        b: {
+            b: 2
+        }
+    };
+    obj.t = obj;
+    console.log(obj);
+    let obj1 = deepClone(obj);
+    obj.b.b = 3;
+    console.log(obj, obj1);
+
+
+
+</script>

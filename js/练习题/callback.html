@@ -1,0 +1,35 @@
+<script>
+    function FileComponent(path, cb) {
+        setTimeout(() => {
+            cb('读取完毕');
+        }, 3000)
+    }
+
+    FileComponent('index.js', (file) => {
+        console.log(file);
+        // 3s 之后 输出 “读取完毕”
+    })
+    // function sleep(time) {
+    //     return new Promise(function (resolve, reject) {
+    //         setTimeout(() => {
+    //             resolve(); //表示任务已完成 可以继续执行了
+    //         }, time);
+    //     })
+    // }
+
+    let a1 = new Array();
+    //myForeach 的功能和用法都和forEach 一样
+    Array.prototype.myForeach = function (cb) {
+        //this 指向 arr
+        for (let i = 0; i < this.length; i++) {
+            cb(this[i], i);
+        }
+    }
+    let arr = [1, 2, 3];
+    arr.myForeach((item, i) => {
+        //item： 循环时候的每一项
+        //i： item循环时候的索引
+        console.log(item, i)
+    })
+
+</script>
