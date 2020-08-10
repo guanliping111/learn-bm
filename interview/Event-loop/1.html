@@ -1,0 +1,27 @@
+<script>
+    //宏任务队列；[setTimeout,setTimeout1]
+    //微任务队列；[Promise.then2]
+    setTimeout(() => {
+        console.log(1);//1
+        Promise.resolve(6).then(console.log);//6
+    },0)
+    new Promise((resolve, reject) => {
+        //生成promise是 同步的
+        console.log(2); //2 4 是同步的
+        resolve(3);
+    })
+    //异步
+    .then(r => {
+        console.log(r);//3
+        setTimeout(() => {
+            console.log(5);//5
+        },0)
+        return undefined
+    })
+    .then(r => {
+        console.log(r);//undefined
+    })
+    console.log(4);//4
+    // 4 2 3 1  X
+    // 2 4 3 undefined 1 6 5 √
+</script>
