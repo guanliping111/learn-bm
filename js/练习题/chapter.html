@@ -11,17 +11,17 @@ const chapterTree = {
 
 function serialize(tree) {
   let res = [];   // ?
-  function walk(node) {
+  function walk(node,prefix) {
       //拼接到这里来
-    res.push(node.name);
+    res.push(prefix, node.name);
     if (node.children) {
-      for (let child of node.children) {
-          // i 序号
-        walk(child);
+      for (let i = 0; i < node.children.length; i++) {
+          // i 序号 递归
+        walk(node.children[i], `${prefix}${i+1}`);
       }
     }
   }
-  walk(tree);
+  walk(tree, '');
   // TODO
   return res;
 }
