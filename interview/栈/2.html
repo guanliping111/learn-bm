@@ -1,0 +1,21 @@
+<script>
+    /**
+    * @param {string} path
+    * @return {string}
+    */
+    var simplifyPath = function (path) {
+        let stack = [];
+        let arr = path.split("/");//分割字符串
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === "" || arr[i] === ".") { } //不修改当前 stack
+            else if (arr[i] === "..") {
+                //pop 从一个数组中删除并返回最后一个元素。
+                stack.pop();//最近的路径
+            }
+            else {
+                stack.push(arr[i]);
+            }
+        }
+        return "/" + stack.join("/");
+    };
+</script>

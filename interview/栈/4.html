@@ -1,0 +1,26 @@
+<script>
+// 实现一个方法 function resolve(baseUrl: string, moduleId: string): string {}
+// resolve('http://www.baidu.com', 'a/b/c'); 
+// 简化为-> http://www.baidu.com/a/b/c
+// resolve('http://www.baidu.com', 'a/../c'); 
+// 简化为-> http://www.baidu.com/c
+// resolve('http://www.baidu.com/1/2', 'a/.././c'); 
+// 简化为-> http://www.baidu.com/1/2/c
+
+function resolve(baseUrl, moduleId) {
+        let stack = [];
+        let arr = moduleId.split("/");//分割字符串
+        for (let i = 0; i < moduleId.length; i++) {
+            if (arr[i] === "" || arr[i] === ".") { } //不修改当前 stack
+            else if (arr[i] === "..") {
+                //pop 从一个数组中删除并返回最后一个元素。
+                stack.pop();//最近的路径
+            }
+            else {
+                stack.push(arr[i]);
+            }
+        }
+        return baseUrl+ "/" + stack.join("/");
+}
+console.log(resolve('http://www.baidu.com', 'a/b/c'));
+</script>

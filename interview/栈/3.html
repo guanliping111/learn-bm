@@ -1,0 +1,25 @@
+<script>
+// 1.输入字符包括，"(" , ")" 和 "<"和其他字符。
+// 2.其他字符表示笔记内容。
+// 3.()之间表示注释内容，任何字符都无效。 括号保证成对出现。
+// 4."<"表示退格, 删去前面一个笔记内容字符。括号不受"<"影响 。
+
+// 输入
+// Corona(Trump)USA<<<Virus
+// 输出
+// CoronaVirus
+function func(str) {
+    let stack = [];
+    //有()里面内的任意字符.* 都替换掉 因为()是特殊字符 用\转义
+    str = str.replace(/\(.*\)/, '')
+    for (let char of str) {
+        if (char === '<') {
+            stack.pop();
+        } else {
+            stack.push(char)
+        }
+    }
+    return stack.join('')
+}
+console.log(func("Corona(Trump)USA<<<Virus"));
+</script>
