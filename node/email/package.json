@@ -1,0 +1,15 @@
+{
+  "name": "email",
+  "version": "1.0.0",
+  "description": "telnet smtp.qq.com 25\r 授权码mclscukayhopiejb\r helo qq //建立连接\r auth login 登录账户 \r MTM1ODIzODEwNUBxcS5jb20=  账户\r bWNsc2N1a2F5aG9waWVqYg==  授权码\r mail from:<1358238105@qq.com>  \r rcpt to:<1358238105@qq.com> \r data //提示下面为正文\r from:school\r to:123\r subject:hello \r dear:xiaoliu haha\r . \r quit//关闭连接",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.3"
+  }
+}
