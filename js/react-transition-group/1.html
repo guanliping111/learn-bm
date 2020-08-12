@@ -1,0 +1,48 @@
+<script>
+     // 数组拍平 
+    //  let a = [1, 2, [3, [4, [5]]]];
+    //  function flat(arr) {
+    //     let res = [];
+    //     for (let i = 0; i < arr.length; i++) {
+    //         let ele = arr[i];
+    //         //ele 必须是基本数据类型
+    //         if(Array.isArray(ele)) {
+    //              //concat() 方法用于合并两个或多个数组
+    //             res = res.concat(flat(ele));
+    //         }
+    //         else{
+    //             res = res.concat(ele);
+    //         }
+    //     }
+    //     return res;
+    // }
+    // console.log(flat(arr));
+
+
+    // 数组拍平 有环
+    let a = [1, 2, [3, [4, [5]]]];
+    a.push(a); //环
+    //解决 不让环 循环超过两次 用map  push(...flat())
+    let map = new Map();
+    function flat(arr) {
+        let res = [];
+        if(map.get(arr)) return map.get(arr);
+        map.set(arr,res);
+        //for(let item of a) {}
+        for (let i = 0; i < arr.length; i++) {
+            let ele = arr[i];
+            //判断是否为数组 Array.isArray
+            if(Array.isArray(ele)) {
+                // res = res.concat(flat(ele)); // 1 2 3 4 5 1 2
+                res.push(...flat(ele)); // 1 2 3 4 5 1 2 3 4 5 
+            }
+            else {
+                // res = res.concat(ele);
+                res.push(ele);
+            }
+        }
+        return res;
+    }
+    console.log(flat(a));
+
+</script>
