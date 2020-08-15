@@ -1,0 +1,8 @@
+/* 全局样式 */
+.container{
+  /* px兼容有问题  rpx 750rpx  设计稿是750 */
+  padding: 0 15rpx;
+}
+.flex-container{
+  display: flex;
+}

@@ -1,0 +1,8 @@
+<view class="container">
+  <van-button type="primary" block 
+    class="big-btn" bindtap="upload">
+    上传图片
+  {{name}}
+  </van-button>
+</view>
+
