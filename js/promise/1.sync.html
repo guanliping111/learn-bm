@@ -1,0 +1,31 @@
+<script>
+    //同步的Promise
+    // [1,2,3,4].forEach((item, i) => {})
+    //这是  new MyPromise这一步
+    function MyPromise(fn) {
+        this.value = undefined;
+        let self = this; //self永远指向this
+        //拿到正确的信息
+        function resolve(value) {
+            self.value = value;
+            console.log(value); //1
+        }
+        //拿到错误的信息
+        function reject() {}
+        //回调
+        fn(resolve,reject);
+    }
+    //这是 .then 这一步 立即调用 promise是成功的
+    MyPromise.prototype.then = function(onFulfilled, onRejected) {
+        onFulfilled(this.value); //resolve的结果
+    }
+
+
+    //resolve reject 也是函数
+    new MyPromise((resolve, reject) => {//同步
+        resolve(1); //如果这里是异步setTimeout 只会拿到value为undefined
+    })
+    .then((res) => {//异步
+        console.log(res); //1
+    }, () => {})
+</script>

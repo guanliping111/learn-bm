@@ -1,0 +1,12 @@
+<script>
+    //精简理解 第一 第二个
+    function Promise(fn) {
+      function resolve(a) {
+        console.log(a);
+      }
+      fn(resolve)
+    }
+    Promise((resolve) => {
+      resolve(3333)
+    })
+</script>
