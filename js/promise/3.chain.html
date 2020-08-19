@@ -1,20 +1,20 @@
 <script>
-    //then的链式调用
+    //拓展 promise 链式调用 
     const PENDING = Symbol('PENGDING');
     const FULFILLED = Symbol('FULFILLED');
     const REJECTED = Symbol('REJECTED');
     function MyPromise(fn) {
-      this.value = undefined;
-      this.onFulfilled = [];
-      this.status = PENDING;
-      let self = this;
+      this.value = undefined; // 传递 resolve 完成的结果 放在 this 上以便于 其他函数 都能访问到
+      this.onFulfilled = []; // 成功时候的回调 改成数组 存放多个成功的回调
+      this.status = PENDING; // 默认状态
+      let self = this; // 防止 this 丢失
       function resolve(value) {
         self.value = value;
-        self.status = FULFILLED;
+        self.status = FULFILLED;// 调用 resolve 表明成功
         console.log(value);
         //调用 onFulfilled 枚举
         self.onFulfilled.forEach(fn => {
-          fn(value);
+          fn(value); // 存着多个回调
         });
       }
       function reject() {}
@@ -46,9 +46,11 @@
     //   return this;
     }
 
+    // 调用 promise
+    // 每一个 then 都返回 promise
     new MyPromise((resolve, reject) => {
       setTimeout(() => {
-        resolve(1);
+        resolve(1); // this 指向哪 看在哪里调用 这里指向 window => undefined
       }, 2000);
     })
     .then((res) => {
