@@ -1,0 +1,20 @@
+<script>
+    // 保存一份 重写方法 引入这段脚本 可以监听用户的操作
+    const _XMLHttpRequest = window.XMLHttpRequest;
+    window.XMLHttpRequest = function XMLHttpRequest() {
+        const _xhr = new _XMLHttpRequest();//恢复原先功能
+        _xhr.addEventListener('readystatechange',function(){
+            if(_xhr.readyState === 4){
+                console.log(_xhr.responseURL, 'success')
+            }
+        })//不与用户的onreadystatechange冲突
+
+        return _xhr;
+    }
+    const xhr = new XMLHttpRequest();
+    xhr.open()
+    xhr.onreadystatechange = () => { }
+    xhr.send()
+
+    
+</script>
