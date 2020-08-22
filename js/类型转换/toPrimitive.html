@@ -1,0 +1,28 @@
+<script>
+    // ToPrimitive(A)通过尝试调用 A 的A.toString() 
+    // 和 A.valueOf() 方法，将参数 A 转换为原始值（Primitive）。
+    let obj = {
+        toString() { // 重写 toString 方法
+            return 'str'
+        },
+        valueOf() { // 重写 valueOf 方法
+            return 0
+        },
+        [Symbol.toPrimitive]: (hint) => {
+            // console.log('转换为', hint)
+            if(hint === 'string'){
+                return 'lemon'
+            }else{
+                return 0;
+            }
+            
+        }
+    }
+    // Object.prototype.toString
+    console.log(obj == 0 ) //true
+    console.log(Number(obj))  // 0
+    console.log(String(obj))  //lemon
+    // 类型判断方法
+    console.log(Object.prototype.toString.call('123')) //[object String]
+    console.log(Object.prototype.toString.apply(/s/))  //[object RegExp]
+</script>
