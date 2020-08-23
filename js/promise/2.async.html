@@ -11,6 +11,7 @@
         this.status = PENDING; //默认状态 pending
         let self = this; //self永远指向this
         //拿到正确的信息
+        // resolve需要做状态的更改
         function resolve(value) {
             self.value = value;
             self.status = FULFILLED; //状态发生变化

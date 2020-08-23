@@ -2,20 +2,27 @@
     //同步的Promise
     // [1,2,3,4].forEach((item, i) => {})
     //这是  new MyPromise这一步
+    //1.构造一个函数的实例  MyPromise，
+    //2. 构造函数MyPromise传入的参数，也是构造函数fn,
+    //3. fn里面依然是接收两个函数 resolve,reject 就把它们定义在外面
+    //4. resolve构造函数里面 拿到正确的信息  resolve的值vlaue只能在内部拿到
+    //5. then 把resolve成功的结果 放到 onFulfilled里面
     function MyPromise(fn) {
         this.value = undefined;
         let self = this; //self永远指向this
-        //拿到正确的信息
+        //拿到正确的信息 就是 resolve的值vlaue只能在内部拿到
         function resolve(value) {
             self.value = value;
             console.log(value); //1
         }
         //拿到错误的信息
         function reject() {}
-        //回调
+        //回调 立即调用  
         fn(resolve,reject);
     }
-    //这是 .then 这一步 立即调用 promise是成功的
+
+     //这个实例有一个then()方法，then接收两个参数
+    // 立即调用 promise是成功的
     MyPromise.prototype.then = function(onFulfilled, onRejected) {
         onFulfilled(this.value); //resolve的结果
     }
