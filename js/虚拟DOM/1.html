@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 2020-8-24 -->
+    <div>
+        <ul class="wrap">
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div id="root"></div>
+    <script>
+        // React.createElement 返回的就是虚拟DOM
+        let Vnode = {
+            type: 'div',
+            props: {
+                children: [
+                    {
+                        type: 'ul', props: {
+                            className: 'wrap',
+                            children: [
+                                { type: 'li', props: { children: ['1'] } },
+                                { type: 'li', props: { children: ['2'] } },
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+       // Vnode.props.children 虚拟 dom 优势: 1.跨平台(Node Browser) 2. 保证性能下限
+        // document.querySelector('div').childNodes
+
+        //jsx => 虚拟DOM => 渲染出来
+        function render(Vnode, container) {
+            const { type, props } = Vnode;
+            if(!type) {
+                container.appendChild(Vnode);
+                return;
+            };
+            const dom = document.createElement(type);
+            props?.children?.Foreach(child => {
+                render(child, dom)
+            })
+            container.appendChild(dom);
+        }
+        render(Vnode, document.getElementById('root')) 
+    </script>
+</body>
+
+</html>
