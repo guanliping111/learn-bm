@@ -19,9 +19,11 @@
     Promise.resolve(3).then(console.log);
     console.log(2);//2 3 1
 ```
+- macro-task(宏任务)：包括整体代码script，setTimeout，setInterval
+- micro-task(微任务)：Promise，process.nextTick
 
 ### 宏任务: 由宿主环境引起的任务
-setTieout
+setTimeout
 整体的一段script
 
 - 渲染事件(如解析DOM、 计算布局、绘制) ;
