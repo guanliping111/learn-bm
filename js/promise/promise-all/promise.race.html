@@ -1,0 +1,13 @@
+<script>
+    // 谁先完成就要谁
+    Promise.myRace = function(promises) {
+        return new Promise((resolve, reject) => {
+            for(let p of promises) {
+                // .then((r) => {resolve(r)}) //获取放入先完成的结果
+                // .catch((e) => {reject(e)}) //获取先失败的结果
+                //简写
+                p.then(resolve).catch(reject)
+            }
+        })
+    }
+</script>

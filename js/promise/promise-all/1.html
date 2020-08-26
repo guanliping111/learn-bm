@@ -1,0 +1,37 @@
+<script>
+// 写出这段代码的输出结果：
+// Promise.all 返回的 promise 的完成状态的结果都是一个数组
+// Promise.all 当所有的 promise 都完成的时候才认为 resolve
+
+function createTask(ms) {
+   return () => {
+     console.log('start', ms);
+     return new Promise(r => 
+        setTimeout(() => {
+            console.log('end', ms);
+            r(ms);
+        }, ms));
+   }
+}
+const tasks = Array(5).fill(null).map((_, i) => 
+    createTask(i * 1000));
+Promise.all(tasks.map(task => 
+    task()
+))
+.then(console.log);
+//一次性输出
+//start 0
+//start 1000
+//start 2000
+//start 3000
+//start 4000
+//end 0 接着每秒输出结果
+//end 1000
+//end 2000
+//end 3000
+//end 4000
+
+//  [0, 1000, 2000, 3000, 4000]
+
+//限流 两个在运行
+</script>

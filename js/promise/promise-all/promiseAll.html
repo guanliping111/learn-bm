@@ -1,0 +1,48 @@
+<script>
+    //手写实现 Promise.all
+    // 接收一个 promise对象的数组作为参数, 有一个失败 则失败
+    let p1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(1);
+        }, 1000);
+    });
+    let p2 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(2);
+        }, 2000);
+    });
+    let p3 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(3);
+        }, 3000);
+    });
+    //Promise.myAll 接收 数组作为参数
+    Promise.myAll = function (promiseArr) {
+        return new Promise((resolve, reject) => {
+            //什么时候都结束
+            let count = 0; //完成了几个 count = promiseArr.length 长度相等 说明结束
+            let res = []; //填充数组
+            for (let i = 0; i < promiseArr.length; i++) {
+                let p = promiseArr[i];
+                p.then((r) => {
+                    //结束
+                    count++;
+                    res[i] = r;
+                    if (count === promiseArr.length) {
+                        //所有的 promise 都成功 resolve成功的结果
+                        resolve(res);
+                    }
+                })
+                .catch(reject);
+            }
+        })
+    }
+    Promise.myAll([p1(), p2(), p3()])
+    .then((r) => {
+        console.log(r)
+    })
+    limitRunTask([p1,p2,p3],2)
+    .then((r) => {
+        console.log(r)
+    })
+</script>
