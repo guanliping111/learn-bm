@@ -29,6 +29,7 @@
   1. this
 
 - js异步处理方式有哪些
+  回调函数 promise async+await 
 
 - Promise有哪些静态属性
    http://www.mamicode.com/info-detail-1875112.html
