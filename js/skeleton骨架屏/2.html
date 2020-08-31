@@ -1,0 +1,16 @@
+<script>
+    // var i = 0; //没有块级作用域
+    for(var i = 0; i < 5; i++) {
+        // setTimeout(() => {
+        //     console.log(i) //这时i是一个独立的形参
+        // },1000 * i);
+        function createTimer(a) {
+            //a只在函数体内有效 
+            setTimeout(() => {
+                console.log(a)
+            },1000 * a);
+        }
+        createTimer(i);
+        //createTimer(i); 形成一个闭包 作用域的查找
+    }
+</script>
