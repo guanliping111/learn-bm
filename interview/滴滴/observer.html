@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Subject {
+            constructor() {
+                this.state = 0; // 会改变， 通知订阅者做相应的操作。
+                this.observers = [];
+            }
+            getState() {
+                return this.state;
+            }
+            setState(state) {
+                this.state = state;
+                this.notifyAllObservers();//通知
+            }
+            attach(observer) {
+                //添加到 observer数组中 push
+                this.observers.push(observer);
+            }
+            notifyAllObservers() {
+                //通知所有的订阅者 循环一遍
+                this.observers.forEach(observer => {
+                    observer.update()
+                })
+            }
+        }
+        class Observer {
+            constructor(name, Subject) {
+                this.name = name;
+                this.Subject = Subject;
+                //收集数据
+                this.Subject.attach(this);
+            }
+            update() {
+                console.log(`${this.name} update,
+                state: ${this.Subject.getState()}`)
+            }
+        }
+        // 订阅发布者模式
+        let s = new Subject(); //实例化1个发布者
+        //实例化3个订阅者
+        let o1 = new Observer('o1', s)
+        let o2 = new Observer('o2', s)
+        let o3 = new Observer('o3', s)
+
+        s.setState(1)
+        s.setState(2)
+        s.setState(3)
+
+    </script>
+</body>
+</html>
