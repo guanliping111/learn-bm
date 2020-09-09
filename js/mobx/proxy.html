@@ -1,0 +1,43 @@
+<script>
+    //监听数组的push
+    //获取/修改程序运行时状态的方法 Array.prototype
+    // let originPush = Array.prototype.push;
+    // Array.prototype.push = function () {
+    //     //监听
+    //     return originPush();
+    // }
+    let obj = { a: 1, b: 2};
+    let handlers = [];
+    //代理
+    let pObj = new Proxy(obj, {
+        //Proxy 代理set 和 get
+        set(obj, prop, val) {
+            console.log('set');
+            return Reflect.set(obj, prop,val);
+        },
+        get(obj, prop) {
+            console.log('get');
+            handlers.push([obj, prop]);
+            return Reflect.get(obj, prop);//恢复它的get 方法功能
+        }
+    });
+    pObj.a = 123; //修改值 触发set
+    console.log(pObj.b); //获取值 触发 get
+
+    let obj = new Map();
+    function autoRun(handler) {
+        handler();
+        console.log(handlers);
+        for(let [obj,prop] of handlers) {
+            let arr = [];
+            arr.push(prop);
+            let map = new Map();
+            map.set(prop, arr);
+            obj.set(obj, map);
+        }
+        
+    }
+    autoRun(() => {
+        console.log(pObj.a);
+    })
+</script>

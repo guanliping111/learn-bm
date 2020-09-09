@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="showValue"></div>
+    <script src="https://unpkg.com/mobx@5.15.6/lib/mobx.umd.js"></script>
+    <script>
+        // observerable 可观测的
+        let obj= { a:1, b:2 }
+        // proxy defineProperty 响应式
+        let proxyObj = mobx.observable(obj);
+        mobx.autorun(() => {
+            console.log('run 1')
+            document.getElementById('showValue')
+            .innerHTML = proxyObj.a;//get行为
+        })
+        mobx.autorun(() => {
+            console.log('run 2')
+            console.log(proxyObj.b)
+        })
+        //重点：收集依赖：知道哪个autorun 需要哪个key
+        setInterval(() => {
+            // proxyObj.a ++;
+            // proxyObj.a = ++ proxyObj.a ;
+            let a = proxyObj.a;
+            a ++;
+            proxyObj.a = a;//set行为
+        }, 1000);
+
+        /*
+        整理依赖收集
+        {
+            xxxObj: {
+                a: [ run1 ]
+                b: [ run2 ]
+            },
+            yyyObj: {}
+        }
+        */
+    </script>
+</body>
+</html>

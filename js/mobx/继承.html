@@ -1,0 +1,24 @@
+<script>
+    function Foo() {
+        this.color = 'red';
+    }
+    Foo.prototype.say = function() {
+
+    }
+    // f.__proto__ == Foo.prototype
+    let f = new Foo();
+    f.say(); //f为什么可以拿到say方法 => new 
+
+    function Bar() {
+        //super 继承方法
+        Foo.apply(this);
+    }
+    //1: Object.setPrototypeOf(Bar.prototype,Foo.prototype)
+    //2: Bar.prototype = Object.create(Foo.prototype)
+    //3. extends === Foo.apply(this) +
+
+    // Bar.prototype = new Foo();
+    // Bar.prototype.__proto__ = Foo.prototype
+    let b = new Bar();
+    console.log(b);
+</script>
