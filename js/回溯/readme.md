@@ -1,3 +1,6 @@
+## 回溯 backtrack
+列出所有可能出现的情况,不重复 => 剪枝
+
 backtrack的公式：
 ```js
 result = []

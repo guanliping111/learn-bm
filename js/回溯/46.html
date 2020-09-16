@@ -11,21 +11,27 @@
 //         backtrack(路径, 选择列表)
 //         撤销选择
 
-function backtrack(nums, path = []) {
+//回溯算法
+var permute = function(nums) {
+    let res = [];
+    function backtrack(nums, path = []) {
     if(path.length === nums.length) {
-        console.log(path);
+        // console.log(path);
+        res.push(path.slice(0));
         return;
     }
     for(let n of nums) {
-        backtrack(nums);
-        path.pop();
+        //剪枝
+        if(path.includes(n))  continue;
+        path.push(n); //做选择
+        backtrack(nums,path); //(路径, 选择列表)
+        path.pop(); //撤销选择 
     }
 }
-var permute = function(nums) {
-    let res = [];
     backtrack(nums);
     return res;
 }
-permute([1,2,3])
-// 30min
+let res = permute([1,2,3])
+console.log(res);
+//56min
 </script>
